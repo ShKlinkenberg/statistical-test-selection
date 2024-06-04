@@ -37,9 +37,9 @@ collapsibleTreeNetwork( data,
 ```{r}
 library(data.tree)
 names(data2)[3] = "title"
-MyTree <- data.tree::FromDataFrameNetwork(data[-1,c("id", "parent_id", "title")])
+MyTree <- data.tree::FromDataFrameNetwork(data[-1,c("id", "parent_id", "title", "description")])
 
 
-print(MyTree, "title")
+print(MyTree, "title", "description")
 ```
 
