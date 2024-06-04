@@ -1,0 +1,68 @@
+parent_id;id;name;description
+;1;Test Selection;How many outcome variables do you have?
+1;2;One;What type of outcome variable do you have?
+2;3;Continuous;How many predictor variables do you have?
+3;4;None;
+4;5;One-sample T-test;
+3;6;One;What type of predictor variable do you have?
+6;7;Continuous;
+7;8;Pearson correlation or regression;What is the non-parametric alternative?
+8;9;Bootstrap correlation/regression, Spearman correlation, Kendall's tau;
+6;10;Categorical;How many categories do you have?
+10;11;Two;Do you have the same or different enitities in each category?
+11;12;Same;
+12;13;Paired-samples T-test (Dependent T-test);What is the non-parametric alternative?
+13;14;Bootstrapped T-test or Wilcoxon signed-rank test;
+11;15;Different;
+15;16;Independent T-test or Pointbiserial correlation;What is the non-parametric alternative?
+16;17;Bootstrapped T-test or Mann-Whitney test;
+10;18;More than two;Do you have the same or different enitities in each category?
+18;19;Same;
+19;20;One-way repeated measures ANOVA;What is the non-parametric alternative?
+20;21;Bootstrapped ANOVA or Friedman's ANOVA;
+18;22;Different;
+22;23;One-way independent ANOVA;What is the non-parametric alternative?
+23;24;Robust ANOVA or Kruskal-Wallis test;
+3;25;Two or more;What type of predictor variable do you have?
+25;26;Continuous;
+26;27;Multiple regression;What is the non-parametric alternative?
+27;28;Bootstrapped multiple regression;
+25;29;Categorical;Do you have the same or different enitities in each category?
+29;30;Same;
+30;31;Factorial repeated measures ANOVA;What is the non-parametric alternative?
+31;32;Robust factorial repeated measures ANOVA;
+29;33;Different;
+33;34;Independent factorial ANOVA/multiple regression;What is the non-parametric alternative?
+34;35;Robust independent factorial ANOVA/multiple regression;
+29;36;Both;
+36;37;Factorial mixed ANOVA;What is the non-parametric alternative?
+37;38;Robust factorial mixed ANOVA;
+25;39;Both;
+39;40;Multiple regression/ANCOVA;What is the non-parametric alternative?
+40;41;Robust ANCOVA/bootstrapped regression;
+2;42;Categorical;How many predictor variables do you have?
+42;43;One;What type of predictor variable do you have?
+43;44;Continuous;
+44;45;Logistic regression or biserial/point biserialcorrelation;
+43;46;Categorical;Do you have the same or different enitities in each category?
+46;47;Different;
+47;48;Pearson chi-square or likelihood ratio;
+42;49;Two or more;What type of predictor variable do you have?
+49;50;Continuous;
+50;51;Logistic regression;
+49;52;Categorical;Do you have the same or different enitities in each category?
+52;53;Different;
+53;54;Loglinear analysis;
+49;55;Both;Do you have the same or different enitities in each category?
+55;56;Different;
+56;57;Logistic regression;
+1;58;Two or more;What type of outcome variable do you have?
+58;59;Continuous;How many predictor variables do you have?
+59;60;One;What type of predictor variable do you have?
+60;61;Categorical;
+61;62;MANOVA;
+59;63;Two or more;What type of predictor variable do you have?
+63;64;Categorical;
+64;65;Factorial MANOVA;
+63;66;Both;
+66;67;MANCOVA;

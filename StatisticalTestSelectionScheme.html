@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistical Test Selection Scheme</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="StatisticalTestSelectionScheme_files/libs/clipboard/clipboard.min.js"></script>
+<script src="StatisticalTestSelectionScheme_files/libs/quarto-html/quarto.js"></script>
+<script src="StatisticalTestSelectionScheme_files/libs/quarto-html/popper.min.js"></script>
+<script src="StatisticalTestSelectionScheme_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="StatisticalTestSelectionScheme_files/libs/quarto-html/anchor.min.js"></script>
+<link href="StatisticalTestSelectionScheme_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="StatisticalTestSelectionScheme_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="StatisticalTestSelectionScheme_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="StatisticalTestSelectionScheme_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="StatisticalTestSelectionScheme_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="StatisticalTestSelectionScheme_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="StatisticalTestSelectionScheme_files/libs/d3-4.10.2/d3.min.js"></script>
+<link href="StatisticalTestSelectionScheme_files/libs/collapsibleTree-0.1.6/collapsibleTree.css" rel="stylesheet">
+<script src="StatisticalTestSelectionScheme_files/libs/collapsibleTree-binding-0.1.8/collapsibleTree.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Statistical Test Selection Scheme</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(collapsibleTree)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"test selection scheme.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">merge</span>(data, data[,<span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"name"</span>)], <span class="at">by.x =</span> <span class="st">"parent_id"</span>, <span class="at">by.y =</span> <span class="st">"id"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data2<span class="sc">$</span>parent_id <span class="ot">&lt;-</span> data2<span class="sc">$</span>name.y</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data2<span class="sc">$</span>id <span class="ot">&lt;-</span> data2<span class="sc">$</span>name.x</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># data2$parent_id   = substring(data2$name.y, 0, 8)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># data2$id          = substring(data2$name.x, 0, 8)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># data2$name.x      = substring(data2$name.x, 0, 8)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># data2$description = substring(data2$description, 0, 8)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># data2 = tail(data2, 6)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data)[<span class="dv">3</span>] <span class="ot">=</span> <span class="st">"title"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data2)[<span class="dv">3</span>] <span class="ot">=</span> <span class="st">"title"</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"&lt;h1&gt;"</span>,data<span class="sc">$</span>title, <span class="st">"&lt;/h1&gt;&lt;p&gt;"</span>, data<span class="sc">$</span>description,<span class="st">"&lt;/p&gt;"</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">collapsibleTreeNetwork</span>( data,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                        <span class="at">collapsed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                        <span class="at">tooltip =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                        <span class="at">tooltipHtml =</span> <span class="st">"tooltip"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                        <span class="at">attribute   =</span> <span class="st">"description"</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="collapsibleTree html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-305571b393e38bb5c714" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-305571b393e38bb5c714">{"x":{"data":{"name":"1","tooltip":"<h1>Test Selection<\/h1><p>How many outcome variables do you have?<\/p>","children":[{"name":"2","tooltip":"<h1>One<\/h1><p>What type of outcome variable do you have?<\/p>","children":[{"name":"3","tooltip":"<h1>Continuous<\/h1><p>How many predictor variables do you have?<\/p>","children":[{"name":"4","tooltip":"<h1>None<\/h1><p><\/p>","children":[{"name":"5","tooltip":"<h1>One-sample T-test<\/h1><p><\/p>"}]},{"name":"6","tooltip":"<h1>One<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"7","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"8","tooltip":"<h1>Pearson correlation or regression<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"9","tooltip":"<h1>Bootstrap correlation/regression, Spearman correlation, Kendall's tau<\/h1><p><\/p>"}]}]},{"name":"10","tooltip":"<h1>Categorical<\/h1><p>How many categories do you have?<\/p>","children":[{"name":"11","tooltip":"<h1>Two<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"12","tooltip":"<h1>Same<\/h1><p><\/p>","children":[{"name":"13","tooltip":"<h1>Paired-samples T-test (Dependent T-test)<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"14","tooltip":"<h1>Bootstrapped T-test or Wilcoxon signed-rank test<\/h1><p><\/p>"}]}]},{"name":"15","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"16","tooltip":"<h1>Independent T-test or Pointbiserial correlation<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"17","tooltip":"<h1>Bootstrapped T-test or Mann-Whitney test<\/h1><p><\/p>"}]}]}]},{"name":"18","tooltip":"<h1>More than two<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"19","tooltip":"<h1>Same<\/h1><p><\/p>","children":[{"name":"20","tooltip":"<h1>One-way repeated measures ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"21","tooltip":"<h1>Bootstrapped ANOVA or Friedman's ANOVA<\/h1><p><\/p>"}]}]},{"name":"22","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"23","tooltip":"<h1>One-way independent ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"24","tooltip":"<h1>Robust ANOVA or Kruskal-Wallis test<\/h1><p><\/p>"}]}]}]}]}]},{"name":"25","tooltip":"<h1>Two or more<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"26","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"27","tooltip":"<h1>Multiple regression<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"28","tooltip":"<h1>Bootstrapped multiple regression<\/h1><p><\/p>"}]}]},{"name":"29","tooltip":"<h1>Categorical<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"30","tooltip":"<h1>Same<\/h1><p><\/p>","children":[{"name":"31","tooltip":"<h1>Factorial repeated measures ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"32","tooltip":"<h1>Robust factorial repeated measures ANOVA<\/h1><p><\/p>"}]}]},{"name":"33","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"34","tooltip":"<h1>Independent factorial ANOVA/multiple regression<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"35","tooltip":"<h1>Robust independent factorial ANOVA/multiple regression<\/h1><p><\/p>"}]}]},{"name":"36","tooltip":"<h1>Both<\/h1><p><\/p>","children":[{"name":"37","tooltip":"<h1>Factorial mixed ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"38","tooltip":"<h1>Robust factorial mixed ANOVA<\/h1><p><\/p>"}]}]}]},{"name":"39","tooltip":"<h1>Both<\/h1><p><\/p>","children":[{"name":"40","tooltip":"<h1>Multiple regression/ANCOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"41","tooltip":"<h1>Robust ANCOVA/bootstrapped regression<\/h1><p><\/p>"}]}]}]}]},{"name":"42","tooltip":"<h1>Categorical<\/h1><p>How many predictor variables do you have?<\/p>","children":[{"name":"43","tooltip":"<h1>One<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"44","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"45","tooltip":"<h1>Logistic regression or biserial/point biserialcorrelation<\/h1><p><\/p>"}]},{"name":"46","tooltip":"<h1>Categorical<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"47","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"48","tooltip":"<h1>Pearson chi-square or likelihood ratio<\/h1><p><\/p>"}]}]}]},{"name":"49","tooltip":"<h1>Two or more<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"50","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"51","tooltip":"<h1>Logistic regression<\/h1><p><\/p>"}]},{"name":"52","tooltip":"<h1>Categorical<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"53","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"54","tooltip":"<h1>Loglinear analysis<\/h1><p><\/p>"}]}]},{"name":"55","tooltip":"<h1>Both<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"56","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"57","tooltip":"<h1>Logistic regression<\/h1><p><\/p>"}]}]}]}]}]},{"name":"58","tooltip":"<h1>Two or more<\/h1><p>What type of outcome variable do you have?<\/p>","children":[{"name":"59","tooltip":"<h1>Continuous<\/h1><p>How many predictor variables do you have?<\/p>","children":[{"name":"60","tooltip":"<h1>One<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"61","tooltip":"<h1>Categorical<\/h1><p><\/p>","children":[{"name":"62","tooltip":"<h1>MANOVA<\/h1><p><\/p>"}]}]},{"name":"63","tooltip":"<h1>Two or more<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"64","tooltip":"<h1>Categorical<\/h1><p><\/p>","children":[{"name":"65","tooltip":"<h1>Factorial MANOVA<\/h1><p><\/p>"}]},{"name":"66","tooltip":"<h1>Both<\/h1><p><\/p>","children":[{"name":"67","tooltip":"<h1>MANCOVA<\/h1><p><\/p>"}]}]}]}]}]},"options":{"hierarchy":[1,2,3,4,5,6,7,8,9],"input":null,"attribute":"description","linkLength":null,"fontSize":10,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":30,"right":35},"fill":"lightsteelblue"}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.tree)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data2)[<span class="dv">3</span>] <span class="ot">=</span> <span class="st">"title"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data.tree<span class="sc">::</span><span class="fu">FromDataFrameNetwork</span>(data[<span class="sc">-</span><span class="dv">1</span>,<span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"parent_id"</span>, <span class="st">"title"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            levelName
+1  1                                 
+2   ¦--2                             
+3   ¦   ¦--3                         
+4   ¦   ¦   ¦--4                     
+5   ¦   ¦   ¦   °--5                 
+6   ¦   ¦   ¦--6                     
+7   ¦   ¦   ¦   ¦--7                 
+8   ¦   ¦   ¦   ¦   °--8             
+9   ¦   ¦   ¦   ¦       °--9         
+10  ¦   ¦   ¦   °--10                
+11  ¦   ¦   ¦       ¦--11            
+12  ¦   ¦   ¦       ¦   ¦--12        
+13  ¦   ¦   ¦       ¦   ¦   °--13    
+14  ¦   ¦   ¦       ¦   ¦       °--14
+15  ¦   ¦   ¦       ¦   °--15        
+16  ¦   ¦   ¦       ¦       °--16    
+17  ¦   ¦   ¦       ¦           °--17
+18  ¦   ¦   ¦       °--18            
+19  ¦   ¦   ¦           ¦--19        
+20  ¦   ¦   ¦           ¦   °--20    
+21  ¦   ¦   ¦           ¦       °--21
+22  ¦   ¦   ¦           °--22        
+23  ¦   ¦   ¦               °--23    
+24  ¦   ¦   ¦                   °--24
+25  ¦   ¦   °--25                    
+26  ¦   ¦       ¦--26                
+27  ¦   ¦       ¦   °--27            
+28  ¦   ¦       ¦       °--28        
+29  ¦   ¦       ¦--29                
+30  ¦   ¦       ¦   ¦--30            
+31  ¦   ¦       ¦   ¦   °--31        
+32  ¦   ¦       ¦   ¦       °--32    
+33  ¦   ¦       ¦   ¦--33            
+34  ¦   ¦       ¦   ¦   °--34        
+35  ¦   ¦       ¦   ¦       °--35    
+36  ¦   ¦       ¦   °--36            
+37  ¦   ¦       ¦       °--37        
+38  ¦   ¦       ¦           °--38    
+39  ¦   ¦       °--39                
+40  ¦   ¦           °--40            
+41  ¦   ¦               °--41        
+42  ¦   °--42                        
+43  ¦       ¦--43                    
+44  ¦       ¦   ¦--44                
+45  ¦       ¦   ¦   °--45            
+46  ¦       ¦   °--46                
+47  ¦       ¦       °--47            
+48  ¦       ¦           °--48        
+49  ¦       °--49                    
+50  ¦           ¦--50                
+51  ¦           ¦   °--51            
+52  ¦           ¦--52                
+53  ¦           ¦   °--53            
+54  ¦           ¦       °--54        
+55  ¦           °--55                
+56  ¦               °--56            
+57  ¦                   °--57        
+58  °--58                            
+59      °--59                        
+60          ¦--60                    
+61          ¦   °--61                
+62          ¦       °--62            
+63          °--63                    
+64              ¦--64                
+65              ¦   °--65            
+66              °--66                
+67                  °--67            </code></pre>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

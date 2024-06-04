@@ -1,0 +1,42 @@
+---
+title: "Statistical Test Selection Scheme"
+format: html
+---
+
+```{r}
+library(collapsibleTree)
+library(dplyr)
+
+data <- read.csv(file = "test selection scheme.csv", header = TRUE, sep = ";")
+
+data2 <- merge(data, data[,c("id", "name")], by.x = "parent_id", by.y = "id", all.x = TRUE)
+data2$parent_id <- data2$name.y
+data2$id <- data2$name.x
+
+# data2$parent_id   = substring(data2$name.y, 0, 8)
+# data2$id          = substring(data2$name.x, 0, 8)
+# data2$name.x      = substring(data2$name.x, 0, 8)
+# data2$description = substring(data2$description, 0, 8)
+
+# data2 = tail(data2, 6)
+
+names(data)[3] = "title"
+names(data2)[3] = "title"
+
+data$tooltip <- paste0("<h1>",data$title, "</h1><p>", data$description,"</p>")
+
+collapsibleTreeNetwork( data,
+                        collapsed = FALSE,
+                        tooltip = TRUE,
+                        tooltipHtml = "tooltip",
+                        attribute   = "description"
+                      )
+```
+
+
+```{r}
+library(data.tree)
+names(data2)[3] = "title"
+data.tree::FromDataFrameNetwork(data[-1,c("id", "parent_id", "title")])
+```
+
