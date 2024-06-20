@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.45">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,7 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="StatisticalTestSelectionScheme_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="StatisticalTestSelectionScheme_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="StatisticalTestSelectionScheme_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="StatisticalTestSelectionScheme_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="StatisticalTestSelectionScheme_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="StatisticalTestSelectionScheme_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="StatisticalTestSelectionScheme_files/libs/d3-4.10.2/d3.min.js"></script>
 <link href="StatisticalTestSelectionScheme_files/libs/collapsibleTree-0.1.6/collapsibleTree.css" rel="stylesheet">
 <script src="StatisticalTestSelectionScheme_files/libs/collapsibleTree-binding-0.1.8/collapsibleTree.js"></script>
@@ -96,7 +97,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(collapsibleTree)</span>
@@ -131,7 +134,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data)[<span class="dv">3</span>] <span class="ot">=</span> <span class="st">"title"</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data2)[<span class="dv">3</span>] <span class="ot">=</span> <span class="st">"title"</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"&lt;h1&gt;"</span>,data<span class="sc">$</span>title, <span class="st">"&lt;/h1&gt;&lt;p&gt;"</span>, data<span class="sc">$</span>description,<span class="st">"&lt;/p&gt;"</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"&lt;h2&gt;"</span>,data<span class="sc">$</span>title, <span class="st">"&lt;br&gt;"</span>, data<span class="sc">$</span>description,<span class="st">"&lt;/h2&gt;"</span>)</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">collapsibleTreeNetwork</span>( data,</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                        <span class="at">collapsed =</span> <span class="cn">FALSE</span>,</span>
@@ -140,8 +143,8 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                        <span class="at">attribute   =</span> <span class="st">"description"</span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="collapsibleTree html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-270bb0c5a09dce822a6b" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-270bb0c5a09dce822a6b">{"x":{"data":{"name":"1","tooltip":"<h1>Test Selection<\/h1><p>How many outcome variables do you have?<\/p>","children":[{"name":"2","tooltip":"<h1>One<\/h1><p>What type of outcome variable do you have?<\/p>","children":[{"name":"3","tooltip":"<h1>Continuous<\/h1><p>How many predictor variables do you have?<\/p>","children":[{"name":"4","tooltip":"<h1>None<\/h1><p><\/p>","children":[{"name":"5","tooltip":"<h1>One-sample T-test<\/h1><p><\/p>"}]},{"name":"6","tooltip":"<h1>One<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"7","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"8","tooltip":"<h1>Pearson correlation or regression<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"9","tooltip":"<h1>Bootstrap correlation/regression, Spearman correlation, Kendall's tau<\/h1><p><\/p>"}]}]},{"name":"10","tooltip":"<h1>Categorical<\/h1><p>How many categories do you have?<\/p>","children":[{"name":"11","tooltip":"<h1>Two<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"12","tooltip":"<h1>Same<\/h1><p><\/p>","children":[{"name":"13","tooltip":"<h1>Paired-samples T-test (Dependent T-test)<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"14","tooltip":"<h1>Bootstrapped T-test or Wilcoxon signed-rank test<\/h1><p><\/p>"}]}]},{"name":"15","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"16","tooltip":"<h1>Independent T-test or Pointbiserial correlation<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"17","tooltip":"<h1>Bootstrapped T-test or Mann-Whitney test<\/h1><p><\/p>"}]}]}]},{"name":"18","tooltip":"<h1>More than two<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"19","tooltip":"<h1>Same<\/h1><p><\/p>","children":[{"name":"20","tooltip":"<h1>One-way repeated measures ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"21","tooltip":"<h1>Bootstrapped ANOVA or Friedman's ANOVA<\/h1><p><\/p>"}]}]},{"name":"22","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"23","tooltip":"<h1>One-way independent ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"24","tooltip":"<h1>Robust ANOVA or Kruskal-Wallis test<\/h1><p><\/p>"}]}]}]}]}]},{"name":"25","tooltip":"<h1>Two or more<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"26","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"27","tooltip":"<h1>Multiple regression<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"28","tooltip":"<h1>Bootstrapped multiple regression<\/h1><p><\/p>"}]}]},{"name":"29","tooltip":"<h1>Categorical<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"30","tooltip":"<h1>Same<\/h1><p><\/p>","children":[{"name":"31","tooltip":"<h1>Factorial repeated measures ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"32","tooltip":"<h1>Robust factorial repeated measures ANOVA<\/h1><p><\/p>"}]}]},{"name":"33","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"34","tooltip":"<h1>Independent factorial ANOVA/multiple regression<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"35","tooltip":"<h1>Robust independent factorial ANOVA/multiple regression<\/h1><p><\/p>"}]}]},{"name":"36","tooltip":"<h1>Both<\/h1><p><\/p>","children":[{"name":"37","tooltip":"<h1>Factorial mixed ANOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"38","tooltip":"<h1>Robust factorial mixed ANOVA<\/h1><p><\/p>"}]}]}]},{"name":"39","tooltip":"<h1>Both<\/h1><p><\/p>","children":[{"name":"40","tooltip":"<h1>Multiple regression/ANCOVA<\/h1><p>What is the non-parametric alternative?<\/p>","children":[{"name":"41","tooltip":"<h1>Robust ANCOVA/bootstrapped regression<\/h1><p><\/p>"}]}]}]}]},{"name":"42","tooltip":"<h1>Categorical<\/h1><p>How many predictor variables do you have?<\/p>","children":[{"name":"43","tooltip":"<h1>One<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"44","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"45","tooltip":"<h1>Logistic regression or biserial/point biserialcorrelation<\/h1><p><\/p>"}]},{"name":"46","tooltip":"<h1>Categorical<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"47","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"48","tooltip":"<h1>Pearson chi-square or likelihood ratio<\/h1><p><\/p>"}]}]}]},{"name":"49","tooltip":"<h1>Two or more<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"50","tooltip":"<h1>Continuous<\/h1><p><\/p>","children":[{"name":"51","tooltip":"<h1>Logistic regression<\/h1><p><\/p>"}]},{"name":"52","tooltip":"<h1>Categorical<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"53","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"54","tooltip":"<h1>Loglinear analysis<\/h1><p><\/p>"}]}]},{"name":"55","tooltip":"<h1>Both<\/h1><p>Do you have the same or different enitities in each category?<\/p>","children":[{"name":"56","tooltip":"<h1>Different<\/h1><p><\/p>","children":[{"name":"57","tooltip":"<h1>Logistic regression<\/h1><p><\/p>"}]}]}]}]}]},{"name":"58","tooltip":"<h1>Two or more<\/h1><p>What type of outcome variable do you have?<\/p>","children":[{"name":"59","tooltip":"<h1>Continuous<\/h1><p>How many predictor variables do you have?<\/p>","children":[{"name":"60","tooltip":"<h1>One<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"61","tooltip":"<h1>Categorical<\/h1><p><\/p>","children":[{"name":"62","tooltip":"<h1>MANOVA<\/h1><p><\/p>"}]}]},{"name":"63","tooltip":"<h1>Two or more<\/h1><p>What type of predictor variable do you have?<\/p>","children":[{"name":"64","tooltip":"<h1>Categorical<\/h1><p><\/p>","children":[{"name":"65","tooltip":"<h1>Factorial MANOVA<\/h1><p><\/p>"}]},{"name":"66","tooltip":"<h1>Both<\/h1><p><\/p>","children":[{"name":"67","tooltip":"<h1>MANCOVA<\/h1><p><\/p>"}]}]}]}]}]},"options":{"hierarchy":[1,2,3,4,5,6,7,8,9],"input":null,"attribute":"description","linkLength":null,"fontSize":10,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":30,"right":35},"fill":"lightsteelblue"}},"evals":[],"jsHooks":[]}</script>
+<div class="collapsibleTree html-widget html-fill-item" id="htmlwidget-5859f769ee19a6601e0f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5859f769ee19a6601e0f">{"x":{"data":{"name":"1","tooltip":"<h2>Test Selection<br>How many outcome variables do you have?<\/h2>","children":[{"name":"2","tooltip":"<h2>One<br>What type of outcome variable do you have?<\/h2>","children":[{"name":"3","tooltip":"<h2>Continuous<br>How many predictor variables do you have?<\/h2>","children":[{"name":"4","tooltip":"<h2>None<br><\/h2>","children":[{"name":"5","tooltip":"<h2>One-sample T-test<br><\/h2>"}]},{"name":"6","tooltip":"<h2>One<br>What type of predictor variable do you have?<\/h2>","children":[{"name":"7","tooltip":"<h2>Continuous<br><\/h2>","children":[{"name":"8","tooltip":"<h2>Pearson correlation or regression<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"9","tooltip":"<h2>Bootstrap correlation/regression, Spearman correlation, Kendall's tau<br><\/h2>"}]}]},{"name":"10","tooltip":"<h2>Categorical<br>How many categories do you have?<\/h2>","children":[{"name":"11","tooltip":"<h2>Two<br>Do you have the same or different enitities in each category?<\/h2>","children":[{"name":"12","tooltip":"<h2>Same<br><\/h2>","children":[{"name":"13","tooltip":"<h2>Paired-samples T-test (Dependent T-test)<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"14","tooltip":"<h2>Bootstrapped T-test or Wilcoxon signed-rank test<br><\/h2>"}]}]},{"name":"15","tooltip":"<h2>Different<br><\/h2>","children":[{"name":"16","tooltip":"<h2>Independent T-test or Pointbiserial correlation<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"17","tooltip":"<h2>Bootstrapped T-test or Mann-Whitney test<br><\/h2>"}]}]}]},{"name":"18","tooltip":"<h2>More than two<br>Do you have the same or different enitities in each category?<\/h2>","children":[{"name":"19","tooltip":"<h2>Same<br><\/h2>","children":[{"name":"20","tooltip":"<h2>One-way repeated measures ANOVA<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"21","tooltip":"<h2>Bootstrapped ANOVA or Friedman's ANOVA<br><\/h2>"}]}]},{"name":"22","tooltip":"<h2>Different<br><\/h2>","children":[{"name":"23","tooltip":"<h2>One-way independent ANOVA<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"24","tooltip":"<h2>Robust ANOVA or Kruskal-Wallis test<br><\/h2>"}]}]}]}]}]},{"name":"25","tooltip":"<h2>Two or more<br>What type of predictor variable do you have?<\/h2>","children":[{"name":"26","tooltip":"<h2>Continuous<br><\/h2>","children":[{"name":"27","tooltip":"<h2>Multiple regression<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"28","tooltip":"<h2>Bootstrapped multiple regression<br><\/h2>"}]}]},{"name":"29","tooltip":"<h2>Categorical<br>Do you have the same or different enitities in each category?<\/h2>","children":[{"name":"30","tooltip":"<h2>Same<br><\/h2>","children":[{"name":"31","tooltip":"<h2>Factorial repeated measures ANOVA<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"32","tooltip":"<h2>Robust factorial repeated measures ANOVA<br><\/h2>"}]}]},{"name":"33","tooltip":"<h2>Different<br><\/h2>","children":[{"name":"34","tooltip":"<h2>Independent factorial ANOVA/multiple regression<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"35","tooltip":"<h2>Robust independent factorial ANOVA/multiple regression<br><\/h2>"}]}]},{"name":"36","tooltip":"<h2>Both<br><\/h2>","children":[{"name":"37","tooltip":"<h2>Factorial mixed ANOVA<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"38","tooltip":"<h2>Robust factorial mixed ANOVA<br><\/h2>"}]}]}]},{"name":"39","tooltip":"<h2>Both<br><\/h2>","children":[{"name":"40","tooltip":"<h2>Multiple regression/ANCOVA<br>What is the non-parametric alternative?<\/h2>","children":[{"name":"41","tooltip":"<h2>Robust ANCOVA/bootstrapped regression<br><\/h2>"}]}]}]}]},{"name":"42","tooltip":"<h2>Categorical<br>How many predictor variables do you have?<\/h2>","children":[{"name":"43","tooltip":"<h2>One<br>What type of predictor variable do you have?<\/h2>","children":[{"name":"44","tooltip":"<h2>Continuous<br><\/h2>","children":[{"name":"45","tooltip":"<h2>Logistic regression or biserial/point biserialcorrelation<br><\/h2>"}]},{"name":"46","tooltip":"<h2>Categorical<br>Do you have the same or different enitities in each category?<\/h2>","children":[{"name":"47","tooltip":"<h2>Different<br><\/h2>","children":[{"name":"48","tooltip":"<h2>Pearson chi-square or likelihood ratio<br><\/h2>"}]}]}]},{"name":"49","tooltip":"<h2>Two or more<br>What type of predictor variable do you have?<\/h2>","children":[{"name":"50","tooltip":"<h2>Continuous<br><\/h2>","children":[{"name":"51","tooltip":"<h2>Logistic regression<br><\/h2>"}]},{"name":"52","tooltip":"<h2>Categorical<br>Do you have the same or different enitities in each category?<\/h2>","children":[{"name":"53","tooltip":"<h2>Different<br><\/h2>","children":[{"name":"54","tooltip":"<h2>Loglinear analysis<br><\/h2>"}]}]},{"name":"55","tooltip":"<h2>Both<br>Do you have the same or different enitities in each category?<\/h2>","children":[{"name":"56","tooltip":"<h2>Different<br><\/h2>","children":[{"name":"57","tooltip":"<h2>Logistic regression<br><\/h2>"}]}]}]}]}]},{"name":"58","tooltip":"<h2>Two or more<br>What type of outcome variable do you have?<\/h2>","children":[{"name":"59","tooltip":"<h2>Continuous<br>How many predictor variables do you have?<\/h2>","children":[{"name":"60","tooltip":"<h2>One<br>What type of predictor variable do you have?<\/h2>","children":[{"name":"61","tooltip":"<h2>Categorical<br><\/h2>","children":[{"name":"62","tooltip":"<h2>MANOVA<br><\/h2>"}]}]},{"name":"63","tooltip":"<h2>Two or more<br>What type of predictor variable do you have?<\/h2>","children":[{"name":"64","tooltip":"<h2>Categorical<br><\/h2>","children":[{"name":"65","tooltip":"<h2>Factorial MANOVA<br><\/h2>"}]},{"name":"66","tooltip":"<h2>Both<br><\/h2>","children":[{"name":"67","tooltip":"<h2>MANCOVA<br><\/h2>"}]}]}]}]}]},"options":{"hierarchy":[1,2,3,4,5,6,7,8,9],"input":null,"attribute":"description","linkLength":null,"fontSize":10,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":30,"right":35},"fill":"lightsteelblue"}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -150,7 +153,9 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>MyTree <span class="ot">&lt;-</span> data.tree<span class="sc">::</span><span class="fu">FromDataFrameNetwork</span>(data[<span class="sc">-</span><span class="dv">1</span>,<span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"parent_id"</span>, <span class="st">"title"</span>, <span class="st">"description"</span>)])</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(MyTree, <span class="st">"title"</span>, <span class="st">"description"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(MyTree, <span class="st">"title"</span>, <span class="st">"description"</span>) <span class="ot">-&gt;</span> newtree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            levelName
 1  1                                 
@@ -396,18 +401,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -439,11 +433,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -453,8 +486,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -466,7 +508,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -510,6 +675,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -535,6 +701,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -595,6 +787,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

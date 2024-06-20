@@ -23,7 +23,7 @@ data2$id <- data2$name.x
 names(data)[3] = "title"
 names(data2)[3] = "title"
 
-data$tooltip <- paste0("<h1>",data$title, "</h1><p>", data$description,"</p>")
+data$tooltip <- paste0("<h2>",data$title, "<br>", data$description,"</h2>")
 
 collapsibleTreeNetwork( data,
                         collapsed = FALSE,
@@ -40,6 +40,6 @@ names(data2)[3] = "title"
 MyTree <- data.tree::FromDataFrameNetwork(data[-1,c("id", "parent_id", "title", "description")])
 
 
-print(MyTree, "title", "description")
+print(MyTree, "title", "description") -> newtree
 ```
 
