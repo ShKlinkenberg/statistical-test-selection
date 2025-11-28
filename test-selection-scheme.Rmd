@@ -1,0 +1,19 @@
+---
+title: "Statistical Test Selection""
+markmap:
+  colorFreezeLevel: 2
+---
+
+# Number of outcome variables
+
+How many dependent outcome variables do you have?
+
+## One
+
+### Type of outcome variable
+
+### Categorical
+
+### Continuous
+
+## More than one

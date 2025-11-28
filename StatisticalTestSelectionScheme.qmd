@@ -43,3 +43,35 @@ MyTree <- data.tree::FromDataFrameNetwork(data[-1,c("id", "parent_id", "title", 
 print(MyTree, "title", "description") -> newtree
 ```
 
+```{r}
+# or development version:
+# devtools::install_github("pzhaonet/mindr")
+library("mindr")
+
+# Display Markdown:
+input <- system.file("test-selection-scheme.Rmd", package = "mindr")
+# file.show(input)
+input_txt <- readLines("test-selection-scheme.Rmd", encoding = "UTF-8")
+markmap(input_txt)
+# markmap(input_txt, root = basename(input), md_list = TRUE, md_eq = FALSE,
+#     md_braces = FALSE, md_bookdown = TRUE)
+```
+
+```{r}
+example(outline)
+```
+
+```{ojs}
+foo = 2
+```
+
+
+```{mermaid}
+flowchart LR
+  A{Number of outcome variables} --> B(One)
+  A --> 2(More than one)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
