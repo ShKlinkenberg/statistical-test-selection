@@ -1,0 +1,4 @@
+{
+    "positron.assistant.enable": true,
+    "positron.assistant.alwaysEnableApplyInEditorAction": true
+}
