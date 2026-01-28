@@ -1,4 +1,15 @@
+---
+config:
+  layout: dagre
+  look: classic
+  theme: default
+---
+
 graph LR
+    
+    classDef test height:100%,fill:#f9f,stroke:#333,stroke-width:1px,font-size:150%;
+
+
 
     2["One"]
     3["Continuous"]
@@ -67,13 +78,16 @@ graph LR
     66["Both"]
     67["MANCOVA"]
 
+    ndv["Number of DVs"]:::test
 
-
-    subgraph Number of DVs
+    subgraph ndv
     2
     58
     end
-    subgraph Type of DV
+
+todv["Type of DV"]:::test
+
+    subgraph todv
     2 --> 3
     2 --> 42
     58 --> 59
@@ -103,7 +117,7 @@ graph LR
     63 --> 66
     end
 
-    classDef test height:100%,fill:#f9f,stroke:#333,stroke-width:1px;
+
     ng["Number of Groups/Levels"]:::test
     
     subgraph ng
@@ -112,9 +126,9 @@ graph LR
     end
     
 
+    indrep["Independent groups or repeated measures"]:::test
   
-  
-    subgraph Independent groups or repeated measures
+    subgraph indrep
     11 --> 12
     11 --> 15
     18 --> 19
