@@ -1,0 +1,70 @@
+flowchart TD
+    Start([Start])
+    Start -->|One| Node_DV_number_One{DV number}
+    Node_DV_number_One -->|Continuous| Node_DV_type_Continuous{DV type}
+    Node_DV_type_Continuous -->|None| Node_IV_number_None{IV number}
+    Node_IV_number_None -->|NA| Node_IV_type_NA{IV type}
+    Node_IV_type_NA -->|NA| Node_IV_categories_NA{IV categories}
+    Node_IV_categories_NA -->|NA| Node_Category_samples_NA{Category samples}
+    Node_Category_samples_NA --> Result_1_P[One-sample T-test]
+    Node_Category_samples_NA --> Result_1_NP[Bootstrapped T-test]
+    Node_DV_type_Continuous -->|One| Node_IV_number_One{IV number}
+    Node_IV_number_One -->|Continuous| Node_IV_type_Continuous{IV type}
+    Node_IV_type_Continuous -->|NA| Node_IV_categories_NA{IV categories}
+    Node_Category_samples_NA --> Result_2_P[Pearson correlation or regression]
+    Node_Category_samples_NA --> Result_2_NP[Bootstrap correlation/regression, Spearman correlation, Kendall's tau]
+    Node_IV_number_One -->|Categorical| Node_IV_type_Categorical{IV type}
+    Node_IV_type_Categorical -->|Two| Node_IV_categories_Two{IV categories}
+    Node_IV_categories_Two -->|Same| Node_Category_samples_Same{Category samples}
+    Node_Category_samples_Same --> Result_3_P[Paired-samples T-test (Dependent T-test)]
+    Node_Category_samples_Same --> Result_3_NP[Bootstrapped T-test or Wilcoxon signed-rank test]
+    Node_IV_categories_Two -->|Different| Node_Category_samples_Different{Category samples}
+    Node_Category_samples_Different --> Result_4_P[Independent T-test or Pointbiserial correlation]
+    Node_Category_samples_Different --> Result_4_NP[Bootstrapped T-test or Mann-Whitney test]
+    Node_IV_type_Categorical -->|More than two| Node_IV_categories_More_than_two{IV categories}
+    Node_IV_categories_More_than_two -->|Same| Node_Category_samples_Same{Category samples}
+    Node_Category_samples_Same --> Result_5_P[One-way repeated measures ANOVA]
+    Node_Category_samples_Same --> Result_5_NP[Bootstrapped ANOVA or Friedman's ANOVA]
+    Node_IV_categories_More_than_two -->|Different| Node_Category_samples_Different{Category samples}
+    Node_Category_samples_Different --> Result_6_P[One-way independent ANOVA]
+    Node_Category_samples_Different --> Result_6_NP[Robust ANOVA or Kruskal-Wallis test]
+    Node_DV_type_Continuous -->|Two or more| Node_IV_number_Two_or_more{IV number}
+    Node_IV_number_Two_or_more -->|Continuous| Node_IV_type_Continuous{IV type}
+    Node_Category_samples_NA --> Result_7_P[Multiple regression]
+    Node_Category_samples_NA --> Result_7_NP[Bootstrapped multiple regression]
+    Node_IV_number_Two_or_more -->|Categorical| Node_IV_type_Categorical{IV type}
+    Node_IV_type_Categorical -->|NA| Node_IV_categories_NA{IV categories}
+    Node_IV_categories_NA -->|Same| Node_Category_samples_Same{Category samples}
+    Node_Category_samples_Same --> Result_8_P[Factorial repeated measures ANOVA]
+    Node_Category_samples_Same --> Result_8_NP[Robust factorial repeated measures ANOVA]
+    Node_IV_categories_NA -->|Different| Node_Category_samples_Different{Category samples}
+    Node_Category_samples_Different --> Result_9_P[Independent factorial ANOVA/multiple regression]
+    Node_Category_samples_Different --> Result_9_NP[Robust independent factorial ANOVA/multiple regression]
+    Node_IV_categories_NA -->|Both| Node_Category_samples_Both{Category samples}
+    Node_Category_samples_Both --> Result_10_P[Factorial mixed ANOVA]
+    Node_Category_samples_Both --> Result_10_NP[Robust factorial mixed ANOVA]
+    Node_IV_number_Two_or_more -->|Both| Node_IV_type_Both{IV type}
+    Node_IV_type_Both -->|NA| Node_IV_categories_NA{IV categories}
+    Node_Category_samples_NA --> Result_11_P[Multiple regression/ANCOVA]
+    Node_Category_samples_NA --> Result_11_NP[Robust ANCOVA/bootstrapped regression]
+    Node_DV_number_One -->|Categorical| Node_DV_type_Categorical{DV type}
+    Node_DV_type_Categorical -->|One| Node_IV_number_One{IV number}
+    Node_Category_samples_NA --> Result_12_P[Logistic regression or biserial/point biserialcorrelation]
+    Node_Category_samples_NA --> Result_12_NP[NA]
+    Node_Category_samples_Different --> Result_13_P[Pearson chi-square or likelihood ratio]
+    Node_Category_samples_Different --> Result_13_NP[NA]
+    Node_DV_type_Categorical -->|Two or more| Node_IV_number_Two_or_more{IV number}
+    Node_Category_samples_NA --> Result_14_P[Logistic regression]
+    Node_Category_samples_NA --> Result_14_NP[NA]
+    Node_Category_samples_Different --> Result_15_P[Loglinear analysis]
+    Node_Category_samples_Different --> Result_15_NP[NA]
+    Node_Category_samples_Different --> Result_16_P[Logistic regression]
+    Node_Category_samples_Different --> Result_16_NP[NA]
+    Start -->|Two or more| Node_DV_number_Two_or_more{DV number}
+    Node_DV_number_Two_or_more -->|Continuous| Node_DV_type_Continuous{DV type}
+    Node_Category_samples_Different --> Result_17_P[MANOVA]
+    Node_Category_samples_Different --> Result_17_NP[NA]
+    Node_Category_samples_Different --> Result_18_P[Factorial MANOVA]
+    Node_Category_samples_Different --> Result_18_NP[NA]
+    Node_Category_samples_NA --> Result_19_P[MANCOVA]
+    Node_Category_samples_NA --> Result_19_NP[NA]
