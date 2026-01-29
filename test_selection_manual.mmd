@@ -6,10 +6,10 @@ config:
 
 graph LR
 
-    nodv{#DV} -->|one| todv{DV type}
+    nodv{#DV} -->|one| todv{DV<br>type}
     click nodv callback "How many dependent variables (DVs) are in your data?"
     todv -->|continuous| nocontiv{#IV}
-    nocontiv -->|one| typeofcontiv{IV type}
+    nocontiv -->|one| typeofcontiv{IV<br>type}
     typeofcontiv -->|continuous| test1["Pearson correlation or regression"]
     test1 --> test1np["Bootstrap correlation/regression, Spearman correlation"]
     typeofcontiv -->|categorical| noivcat{#cat}
