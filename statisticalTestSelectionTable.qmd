@@ -57,46 +57,47 @@ data_wide_read$NPT  <- paste0(mmd_decision_node_var[8], gsub(" ","",data_wide_re
 
 DVn2DVt <- unique(
 sprintf("  DVn{#DV} -->|%s| %s{%s}\n",
-        data_wide_read$'DV number',
+        data_wide_read$'DV number', # Node #DV
         data_wide_read$DVn,
-        mmd_decision_node_names[2])
+        mmd_decision_node_names[2]) # Node DV type
 )
 
 DVt2IVn <- unique(
 sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$DVn,
+        data_wide_read$DVn,         # node DV type
         data_wide_read$'DV type',
         data_wide_read$DVt,
-        mmd_decision_node_names[3])
+        mmd_decision_node_names[3]) # node #IV
         )
 
 IVn2IVt <- unique(
 sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$DVt,
+        data_wide_read$DVt,         # node #IV
         data_wide_read$'IV number', # match
         data_wide_read$IVn,         # match
-        mmd_decision_node_names[4]) # next node
+        mmd_decision_node_names[4]) # node IV type
         )
 
 IVt2IVc <- unique(
 sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$IVn,
-        data_wide_read$'IV categories', # match
-        data_wide_read$IVc,         # match
-        mmd_decision_node_names[5]) # next node
+        data_wide_read$IVn,             # node IV type
+        data_wide_read$'IV type',       # match
+        data_wide_read$IVt,             # match
+        mmd_decision_node_names[5])     # node IV categories
         )
 
 IVc2IVs <- unique(
 sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$IVc,
-        data_wide_read$'Sampled',   # match
-        data_wide_read$Samp,        # match
-        mmd_decision_node_names[6]) # next node
+        data_wide_read$IVt,
+        data_wide_read$'IV categories', # match
+        data_wide_read$IVc,             # match
+        mmd_decision_node_names[6])     # node IV sampled
         )
 
 IVs2PT <- unique(
-sprintf('  %s --> %s["%s"]\n',
-        data_wide_read$Samp,
+sprintf('  %s -->|%s| %s["%s"]\n',
+        data_wide_read$IVc,
+        data_wide_read$'Sampled',      # match
         data_wide_read$PT,                # match
         data_wide_read$'Parametric Test') # match
         )
@@ -120,13 +121,13 @@ PT2NPT
 
 cat("flowchart LR\n", file = "output.mmd")
 
-cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT,
-    "subgraph Parametric Tests\n",
-    paste0(data_wide_read$NPT,collapse = "\n"),
+cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT, PT2NPT,
+    "\nsubgraph Parametric Tests\n",
+    paste0(data_wide_read$PT,collapse = "\n"),
     "\nend\n",
     "subgraph Non Parametric Tests\n",
-    PT2NPT,
-    "end\n",
+    paste0(data_wide_read$NPT,collapse = "\n"),
+    "\nend\n",
     sep = "",
     file = "output.mmd",
     append = TRUE)
@@ -135,10 +136,17 @@ cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT,
 
 
 
-```{mermaid}
-graph LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
+```{r}
+n.cols <- 1:7
+DVn <- unique(data_wide_read[,1])
+DVt <- unique(data_wide_read[,2])
+IVn <- unique(data_wide_read[,3])
+IVt <- unique(data_wide_read[,4])
+IVc <- unique(data_wide_read[,5])
+Samp <- unique(data_wide_read[,6])
+PT <- unique(data_wide_read[,7])
+
+for (a in DVn) {
+        print(a)
+}
 ```

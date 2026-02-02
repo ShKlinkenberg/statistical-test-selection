@@ -1,91 +1,71 @@
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+
+
 flowchart LR
   DVn{#DV} -->|One| DVnOne{DV<br>type}
   DVn{#DV} -->|Two or more| DVnTwoormore{DV<br>type}
   DVnOne -->|Continuous| DVnOneContinuous{#IV}
   DVnOne -->|Categorical| DVnOneCategorical{#IV}
   DVnTwoormore -->|Continuous| DVnTwoormoreContinuous{#IV}
-  DVnOneContinuous -->|None| DVnOneContinuousNone{IV<br>type}
+  DVnOneContinuous -->|None| PTOne-sampleT-test["One-sample T-test"]
   DVnOneContinuous -->|One| DVnOneContinuousOne{IV<br>type}
   DVnOneContinuous -->|Two or more| DVnOneContinuousTwoormore{IV<br>type}
   DVnOneCategorical -->|One| DVnOneCategoricalOne{IV<br>type}
   DVnOneCategorical -->|Two or more| DVnOneCategoricalTwoormore{IV<br>type}
   DVnTwoormoreContinuous -->|One| DVnTwoormoreContinuousOne{IV<br>type}
   DVnTwoormoreContinuous -->|Two or more| DVnTwoormoreContinuousTwoormore{IV<br>type}
-  DVnOneContinuousNone -->|NA| DVnOneContinuousNoneNANA{#Cat}
-  DVnOneContinuousOne -->|NA| DVnOneContinuousOneContinuousNA{#Cat}
-  DVnOneContinuousOne -->|Two| DVnOneContinuousOneCategoricalTwo{#Cat}
-  DVnOneContinuousOne -->|More than two| DVnOneContinuousOneCategoricalMorethantwo{#Cat}
-  DVnOneContinuousTwoormore -->|NA| DVnOneContinuousTwoormoreContinuousNA{#Cat}
-  DVnOneContinuousTwoormore -->|NA| DVnOneContinuousTwoormoreCategoricalNA{#Cat}
-  DVnOneContinuousTwoormore -->|NA| DVnOneContinuousTwoormoreBothNA{#Cat}
-  DVnOneCategoricalOne -->|NA| DVnOneCategoricalOneContinuousNA{#Cat}
-  DVnOneCategoricalOne -->|NA| DVnOneCategoricalOneCategoricalNA{#Cat}
-  DVnOneCategoricalTwoormore -->|NA| DVnOneCategoricalTwoormoreContinuousNA{#Cat}
-  DVnOneCategoricalTwoormore -->|NA| DVnOneCategoricalTwoormoreCategoricalNA{#Cat}
-  DVnOneCategoricalTwoormore -->|NA| DVnOneCategoricalTwoormoreBothNA{#Cat}
-  DVnTwoormoreContinuousOne -->|NA| DVnTwoormoreContinuousOneCategoricalNA{#Cat}
-  DVnTwoormoreContinuousTwoormore -->|NA| DVnTwoormoreContinuousTwoormoreCategoricalNA{#Cat}
-  DVnTwoormoreContinuousTwoormore -->|NA| DVnTwoormoreContinuousTwoormoreBothNA{#Cat}
-  DVnOneContinuousNoneNANA -->|NA| DVnOneContinuousNoneNANANA{Samp}
-  DVnOneContinuousOneContinuousNA -->|NA| DVnOneContinuousOneContinuousNANA{Samp}
-  DVnOneContinuousOneCategoricalTwo -->|Repeated| DVnOneContinuousOneCategoricalTwoRepeated{Samp}
-  DVnOneContinuousOneCategoricalTwo -->|Independent| DVnOneContinuousOneCategoricalTwoIndependent{Samp}
-  DVnOneContinuousOneCategoricalMorethantwo -->|Repeated| DVnOneContinuousOneCategoricalMorethantwoRepeated{Samp}
-  DVnOneContinuousOneCategoricalMorethantwo -->|Independent| DVnOneContinuousOneCategoricalMorethantwoIndependent{Samp}
-  DVnOneContinuousTwoormoreContinuousNA -->|NA| DVnOneContinuousTwoormoreContinuousNANA{Samp}
-  DVnOneContinuousTwoormoreCategoricalNA -->|Repeated| DVnOneContinuousTwoormoreCategoricalNARepeated{Samp}
-  DVnOneContinuousTwoormoreCategoricalNA -->|Independent| DVnOneContinuousTwoormoreCategoricalNAIndependent{Samp}
-  DVnOneContinuousTwoormoreCategoricalNA -->|Both| DVnOneContinuousTwoormoreCategoricalNABoth{Samp}
-  DVnOneContinuousTwoormoreBothNA -->|NA| DVnOneContinuousTwoormoreBothNANA{Samp}
-  DVnOneCategoricalOneContinuousNA -->|NA| DVnOneCategoricalOneContinuousNANA{Samp}
-  DVnOneCategoricalOneCategoricalNA -->|Independent| DVnOneCategoricalOneCategoricalNAIndependent{Samp}
-  DVnOneCategoricalTwoormoreContinuousNA -->|NA| DVnOneCategoricalTwoormoreContinuousNANA{Samp}
-  DVnOneCategoricalTwoormoreCategoricalNA -->|Independent| DVnOneCategoricalTwoormoreCategoricalNAIndependent{Samp}
-  DVnOneCategoricalTwoormoreBothNA -->|Independent| DVnOneCategoricalTwoormoreBothNAIndependent{Samp}
-  DVnTwoormoreContinuousOneCategoricalNA -->|Independent| DVnTwoormoreContinuousOneCategoricalNAIndependent{Samp}
-  DVnTwoormoreContinuousTwoormoreCategoricalNA -->|Independent| DVnTwoormoreContinuousTwoormoreCategoricalNAIndependent{Samp}
-  DVnTwoormoreContinuousTwoormoreBothNA -->|NA| DVnTwoormoreContinuousTwoormoreBothNANA{Samp}
-  DVnOneContinuousNoneNANANA --> PTOne-sampleT-test["One-sample T-test"]
-  DVnOneContinuousOneContinuousNANA --> PTPearsoncorrelationorregression["Pearson correlation or regression"]
-  DVnOneContinuousOneCategoricalTwoRepeated --> PTPaired-samplesT-testDependentT-test["Paired-samples T-test (Dependent T-test)"]
-  DVnOneContinuousOneCategoricalTwoIndependent --> PTIndependentT-testorPointbiserialcorrelation["Independent T-test or Pointbiserial correlation"]
-  DVnOneContinuousOneCategoricalMorethantwoRepeated --> PTOne-wayrepeatedmeasuresANOVA["One-way repeated measures ANOVA"]
-  DVnOneContinuousOneCategoricalMorethantwoIndependent --> PTOne-wayindependentANOVA["One-way independent ANOVA"]
-  DVnOneContinuousTwoormoreContinuousNANA --> PTMultipleregression["Multiple regression"]
-  DVnOneContinuousTwoormoreCategoricalNARepeated --> PTFactorialrepeatedmeasuresANOVA["Factorial repeated measures ANOVA"]
-  DVnOneContinuousTwoormoreCategoricalNAIndependent --> PTIndependentfactorialANOVA/multipleregression["Independent factorial ANOVA/multiple regression"]
-  DVnOneContinuousTwoormoreCategoricalNABoth --> PTFactorialmixedANOVA["Factorial mixed ANOVA"]
-  DVnOneContinuousTwoormoreBothNANA --> PTMultipleregression/ANCOVA["Multiple regression/ANCOVA"]
-  DVnOneCategoricalOneContinuousNANA --> PTLogisticregressionorbiserial/pointbiserialcorrelation["Logistic regression or biserial/point biserialcorrelation"]
-  DVnOneCategoricalOneCategoricalNAIndependent --> PTPearsonchi-squareorlikelihoodratio["Pearson chi-square or likelihood ratio"]
-  DVnOneCategoricalTwoormoreContinuousNANA --> PTLogisticregression["Logistic regression"]
-  DVnOneCategoricalTwoormoreCategoricalNAIndependent --> PTLoglinearanalysis["Loglinear analysis"]
-  DVnOneCategoricalTwoormoreBothNAIndependent --> PTLogisticregression["Logistic regression"]
-  DVnTwoormoreContinuousOneCategoricalNAIndependent --> PTMANOVA["MANOVA"]
-  DVnTwoormoreContinuousTwoormoreCategoricalNAIndependent --> PTFactorialMANOVA["Factorial MANOVA"]
-  DVnTwoormoreContinuousTwoormoreBothNANA --> PTMANCOVA["MANCOVA"]
-subgraph Parametric Tests
-NPTBootstrappedT-test
-NPTBootstrapcorrelation/regression,Spearmancorrelation,Kendall'stau
-NPTBootstrappedT-testorWilcoxonsigned-ranktest
-NPTBootstrappedT-testorMann-Whitneytest
-NPTBootstrappedANOVAorFriedman'sANOVA
-NPTRobustANOVAorKruskal-Wallistest
-NPTBootstrappedmultipleregression
-NPTRobustfactorialrepeatedmeasuresANOVA
-NPTRobustindependentfactorialANOVA/multipleregression
-NPTRobustfactorialmixedANOVA
-NPTRobustANCOVA/bootstrappedregression
-NPTNA
-NPTNA
-NPTNA
-NPTNA
-NPTNA
-NPTNA
-NPTNA
-NPTNA
-end
-subgraph Non Parametric Tests
+
+  DVnOneContinuousOne -->|Continuous| DVnOneContinuousOneContinuous{#Cat}
+  DVnOneContinuousOne -->|Categorical| DVnOneContinuousOneCategorical{#Cat}
+  DVnOneContinuousTwoormore -->|Continuous| DVnOneContinuousTwoormoreContinuous{#Cat}
+  DVnOneContinuousTwoormore -->|Categorical| DVnOneContinuousTwoormoreCategorical{#Cat}
+  DVnOneContinuousTwoormore -->|Both| DVnOneContinuousTwoormoreBoth{#Cat}
+  DVnOneCategoricalOne -->|Continuous| DVnOneCategoricalOneContinuous{#Cat}
+  DVnOneCategoricalOne -->|Categorical| DVnOneCategoricalOneCategorical{#Cat}
+  DVnOneCategoricalTwoormore -->|Continuous| DVnOneCategoricalTwoormoreContinuous{#Cat}
+  DVnOneCategoricalTwoormore -->|Categorical| DVnOneCategoricalTwoormoreCategorical{#Cat}
+  DVnOneCategoricalTwoormore -->|Both| DVnOneCategoricalTwoormoreBoth{#Cat}
+  DVnTwoormoreContinuousOne -->|Categorical| DVnTwoormoreContinuousOneCategorical{#Cat}
+  DVnTwoormoreContinuousTwoormore -->|Categorical| DVnTwoormoreContinuousTwoormoreCategorical{#Cat}
+  DVnTwoormoreContinuousTwoormore -->|Both| DVnTwoormoreContinuousTwoormoreBoth{#Cat}:::hidden
+
+  DVnOneContinuousOneContinuous -->| | DVnOneContinuousOneContinuousNA{Samp}
+  DVnOneContinuousOneCategorical -->|Two| DVnOneContinuousOneCategoricalTwo{Samp}
+  DVnOneContinuousOneCategorical -->|More than two| DVnOneContinuousOneCategoricalMorethantwo{Samp}
+  DVnOneContinuousTwoormoreContinuous -->| | DVnOneContinuousTwoormoreContinuousNA{Samp}
+  DVnOneContinuousTwoormoreCategorical -->| | DVnOneContinuousTwoormoreCategoricalNA{Samp}
+  DVnOneContinuousTwoormoreBoth -->| | DVnOneContinuousTwoormoreBothNA{Samp}
+  DVnOneCategoricalOneContinuous -->| | DVnOneCategoricalOneContinuousNA{Samp}
+  DVnOneCategoricalOneCategorical -->| | DVnOneCategoricalOneCategoricalNA{Samp}
+  DVnOneCategoricalTwoormoreContinuous -->| | DVnOneCategoricalTwoormoreContinuousNA{Samp}
+  DVnOneCategoricalTwoormoreCategorical -->| | DVnOneCategoricalTwoormoreCategoricalNA{Samp}
+  DVnOneCategoricalTwoormoreBoth -->| | DVnOneCategoricalTwoormoreBothNA{Samp}
+  DVnTwoormoreContinuousOneCategorical -->| | DVnTwoormoreContinuousOneCategoricalNA{Samp}
+  DVnTwoormoreContinuousTwoormoreCategorical -->| | DVnTwoormoreContinuousTwoormoreCategoricalNA{Samp}
+  DVnTwoormoreContinuousTwoormoreBoth -->| | DVnTwoormoreContinuousTwoormoreBothNA{Samp}:::hidden
+classDef hidden display: none;
+  DVnOneContinuousOneContinuousNA -->| | PTPearsoncorrelationorregression["Pearson correlation or regression"]
+  DVnOneContinuousOneCategoricalTwo -->|Repeated| PTPaired-samplesT-testDependentT-test["Paired-samples T-test (Dependent T-test)"]
+  DVnOneContinuousOneCategoricalTwo -->|Independent| PTIndependentT-testorPointbiserialcorrelation["Independent T-test or Pointbiserial correlation"]
+  DVnOneContinuousOneCategoricalMorethantwo -->|Repeated| PTOne-wayrepeatedmeasuresANOVA["One-way repeated measures ANOVA"]
+  DVnOneContinuousOneCategoricalMorethantwo -->|Independent| PTOne-wayindependentANOVA["One-way independent ANOVA"]
+  DVnOneContinuousTwoormoreContinuousNA -->| | PTMultipleregression["Multiple regression"]
+  DVnOneContinuousTwoormoreCategoricalNA -->|Repeated| PTFactorialrepeatedmeasuresANOVA["Factorial repeated measures ANOVA"]
+  DVnOneContinuousTwoormoreCategoricalNA -->|Independent| PTIndependentfactorialANOVA/multipleregression["Independent factorial ANOVA/multiple regression"]
+  DVnOneContinuousTwoormoreCategoricalNA -->|Both| PTFactorialmixedANOVA["Factorial mixed ANOVA"]
+  DVnOneContinuousTwoormoreBothNA -->| | PTMultipleregression/ANCOVA["Multiple regression/ANCOVA"]
+  DVnOneCategoricalOneContinuousNA -->| | PTLogisticregressionorbiserial/pointbiserialcorrelation["Logistic regression or biserial/point biserialcorrelation"]
+  DVnOneCategoricalOneCategoricalNA -->|Independent| PTPearsonchi-squareorlikelihoodratio["Pearson chi-square or likelihood ratio"]
+  DVnOneCategoricalTwoormoreContinuousNA -->| | PTLogisticregression["Logistic regression"]
+  DVnOneCategoricalTwoormoreCategoricalNA -->|Independent| PTLoglinearanalysis["Loglinear analysis"]
+  DVnOneCategoricalTwoormoreBothNA -->|Independent| PTLogisticregression["Logistic regression"]
+  DVnTwoormoreContinuousOneCategoricalNA -->|Independent| PTMANOVA["MANOVA"]
+  DVnTwoormoreContinuousTwoormoreCategoricalNA -->|Independent| PTFactorialMANOVA["Factorial MANOVA"]
+  DVnTwoormoreContinuousTwoormoreBothNA -->| | PTMANCOVA["MANCOVA"]
   PTOne-sampleT-test --> NPTBootstrappedT-test["Bootstrapped T-test"]
   PTPearsoncorrelationorregression --> NPTBootstrapcorrelation/regression,Spearmancorrelation,Kendall'stau["Bootstrap correlation/regression, Spearman correlation, Kendall's tau"]
   PTPaired-samplesT-testDependentT-test --> NPTBootstrappedT-testorWilcoxonsigned-ranktest["Bootstrapped T-test or Wilcoxon signed-rank test"]
@@ -97,11 +77,40 @@ subgraph Non Parametric Tests
   PTIndependentfactorialANOVA/multipleregression --> NPTRobustindependentfactorialANOVA/multipleregression["Robust independent factorial ANOVA/multiple regression"]
   PTFactorialmixedANOVA --> NPTRobustfactorialmixedANOVA["Robust factorial mixed ANOVA"]
   PTMultipleregression/ANCOVA --> NPTRobustANCOVA/bootstrappedregression["Robust ANCOVA/bootstrapped regression"]
-  PTLogisticregressionorbiserial/pointbiserialcorrelation --> NPTNA["NA"]
-  PTPearsonchi-squareorlikelihoodratio --> NPTNA["NA"]
-  PTLogisticregression --> NPTNA["NA"]
-  PTLoglinearanalysis --> NPTNA["NA"]
-  PTMANOVA --> NPTNA["NA"]
-  PTFactorialMANOVA --> NPTNA["NA"]
-  PTMANCOVA --> NPTNA["NA"]
+
+
+subgraph Parametric Tests
+PTOne-sampleT-test
+PTPearsoncorrelationorregression
+PTPaired-samplesT-testDependentT-test
+PTIndependentT-testorPointbiserialcorrelation
+PTOne-wayrepeatedmeasuresANOVA
+PTOne-wayindependentANOVA
+PTMultipleregression
+PTFactorialrepeatedmeasuresANOVA
+PTIndependentfactorialANOVA/multipleregression
+PTFactorialmixedANOVA
+PTMultipleregression/ANCOVA
+PTLogisticregressionorbiserial/pointbiserialcorrelation
+PTPearsonchi-squareorlikelihoodratio
+PTLogisticregression
+PTLoglinearanalysis
+PTLogisticregression
+PTMANOVA
+PTFactorialMANOVA
+PTMANCOVA
+end
+subgraph Non Parametric Tests
+NPTBootstrappedT-test
+NPTBootstrapcorrelation/regression,Spearmancorrelation,Kendall'stau
+NPTBootstrappedT-testorWilcoxonsigned-ranktest
+NPTBootstrappedT-testorMann-Whitneytest
+NPTBootstrappedANOVAorFriedman'sANOVA
+NPTRobustANOVAorKruskal-Wallistest
+NPTBootstrappedmultipleregression
+NPTRobustfactorialrepeatedmeasuresANOVA
+NPTRobustindependentfactorialANOVA/multipleregression
+NPTRobustfactorialmixedANOVA
+NPTRobustANCOVA/bootstrappedregression
+
 end
