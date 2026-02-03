@@ -112,10 +112,12 @@ sprintf('  %s --> %s["%s"]\n',
 DVn2DVt
 DVt2IVn
 IVn2IVt
-IVt2IVc
-IVc2IVs
-IVs2PT
-PT2NPT
+IVt2IVc <- gsub("\\|NA\\|", "| |", IVt2IVc)
+IVc2IVs <- gsub("\\|NA\\|", "| |", IVc2IVs)
+IVs2PT  <- gsub("\\|NA\\|", "| |", IVs2PT)
+PT2NPT  <- grep("NA", PT2NPT, value = TRUE, invert = TRUE)
+
+grep("NA", IVt2IVc, value = TRUE)
 
 
 
@@ -126,7 +128,7 @@ cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT, PT2NPT,
     paste0(data_wide_read$PT,collapse = "\n"),
     "\nend\n",
     "subgraph Non Parametric Tests\n",
-    paste0(data_wide_read$NPT,collapse = "\n"),
+    paste0(grep("NPTNA", data_wide_read$NPT, value = TRUE, invert = TRUE), collapse = "\n"), 
     "\nend\n",
     sep = "",
     file = "output.mmd",
@@ -137,19 +139,55 @@ cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT, PT2NPT,
 
 
 ```{r}
-n.cols <- 1:7
-DVn <- unique(data_wide_read[,1])
-DVt <- unique(data_wide_read[,2])
-IVn <- unique(data_wide_read[,3])
-IVt <- unique(data_wide_read[,4])
-IVc <- unique(data_wide_read[,5])
-Samp <- unique(data_wide_read[,6])
-PT <- unique(data_wide_read[,7])
+data_wide_read <- read.csv2("test_selection_scheme_wide.csv")
 
-for (a in 1:2) {
-        print(paste0("A -->|",a,"| "))
-        for (b in 1:2) {
-                print(paste0("b"))
+n.cols <- 1:7
+DVn  <- gsub(" |\\(|\\)","",unique(data_wide_read[,1]) )
+DVt  <- gsub(" |\\(|\\)","",unique(data_wide_read[,2]) )
+IVn  <- gsub(" |\\(|\\)","",unique(data_wide_read[,3]) )
+IVt  <- gsub(" |\\(|\\)","",unique(data_wide_read[,4]) )
+IVc  <- gsub(" |\\(|\\)","",unique(data_wide_read[,5]) )
+Samp <- gsub(" |\\(|\\)","",unique(data_wide_read[,6]) )
+PT   <- gsub(" |\\(|\\)","",unique(data_wide_read[,7]) )
+
+# skipNode <- function(edge_label, node_to) {
+    
+#     # If edge_label is not NA, then skip this node
+#     if (!edge_label == "") { return( sprintf("|%s| ", edge_label) ) } else { return( "" ) }
+
+# }
+
+i = 1
+for (a in DVn) {
+
+    print( sprintf("  DVn{#DV} -->|%s| DVn%s", a, a) ) 
+    for (b in IVc) {
+        print( sprintf("  DVn%s -->", a ) )
+        # edge label
+        if (b != "") { print( sprintf("|%s| ", b) ) }
+        for (c in Samp) {
+              # If no edge then blank
+              # if edge than first finish node to previous edge
+              if (c != "") { print( sprintf("%s%s%s\n", a, b, c) ) }
+              # Next new node and next edge
+              if (c != "") { print( sprintf("%s%s%s -->|%s| ", a, b, c, c) ) }
+              print( sprintf(" %s\n", PT[i]) ) 
+              i = i + 1
         }
+    }
 }
+
+
+
+
+
+
+# DVn2DVt <- unique(
+# sprintf("  DVn{#DV} -->|%s| %s{%s}\n",
+#         data_wide_read$'DV number', # Node #DV
+#         data_wide_read$DVn,
+#         mmd_decision_node_names[2]) # Node DV type
+# )
+
+
 ```
