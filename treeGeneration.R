@@ -1,79 +1,80 @@
 # Read data
-data_wide_read <- read_csv2("test_selection_scheme_wide.csv")
+data_wide_read <- read.csv2("test_selection_scheme_wide.csv")
+data_wide_read <- cbind("DVn", data_wide_read)
 
-# Define decision node variables and names
+col_names <- names(data_wide_read)
+
+# Creat variables for mermaid syntax for flowchart decision nodes
 mmd_decision_node_var <- c("DVn", "DVt", "IVn", "IVt", "IVc", "Samp", "PT", "NPT")
-decision_cols <- c("DV number", "DV type", "IV number", "IV type", "IV categories", "Sampled")
-decision_labels <- c("{DV<br>type}", "{#IV}", "{IV<br>type}", "{#Cat}", "{Samp}")
 
-# Function to clean strings for mermaid node IDs
-clean_str <- function(x) gsub(" |\\(|\\)", "", x)
+# Creat shortened mermaid syntax for flowchart decision nodes
+mmd_decision_node_names <- c("DV#", "DV<br>type", "#IV", "IV<br>type", "#Cat", "Samp")
 
-# Generate mermaid flowchart edges
-edges <- list()
+# Get number of columns and rows in the data frame
+n.coll <- ncol(data_wide_read)
+n.row  <- nrow(data_wide_read)
 
-for (i in 1:nrow(data_wide_read)) {
-  row <- data_wide_read[i, ]
-  
-  # Start from root
-  current_node <- "DVn"
-  current_label <- "{#DV}"
-  
-  # Build the cumulative node path
-  node_path <- "DVn"
-  last_col_value <- NA  # Track last non-NA value for edge label to PT
-  
-  # Iterate through decision columns
-  for (j in 1:length(decision_cols)) {
-    col_value <- row[[decision_cols[j]]]
-    
-    # Skip if NA - don't create edge, but accumulate path
-    if (is.na(col_value) || col_value == "NA") {
-      node_path <- paste0(node_path, "NA")
-      next
-    }
-    
-    # Store this as the last valid value
-    last_col_value <- col_value
-    
-    # Build next node ID using accumulated path + current value
-    next_node <- paste0(node_path, clean_str(col_value))
-    
-    # Create edge from last valid node to this node
-    edge <- sprintf("  %s%s -->|%s| %s%s\n", 
-                    current_node, current_label, col_value, 
-                    next_node, decision_labels[j])
-    edges[[length(edges) + 1]] <- edge
-    
-    # Update for next iteration
-    current_node <- next_node
-    current_label <- ""
-    node_path <- next_node
-  }
-  
-  # Connect last valid node to parametric test
-  pt_value <- row[["Parametric Test"]]
-  if (!is.na(pt_value) && pt_value != "NA") {
-    pt_node <- paste0("PT", clean_str(pt_value))
-    
-    # Use last_col_value as the edge label
-    edge_pt <- sprintf('  %s -->|%s| %s["%s"]\n', 
-                       current_node, last_col_value, pt_node, pt_value)
-    edges[[length(edges) + 1]] <- edge_pt
-    
-    # Add non-parametric test if not NA
-    npt_value <- row[["Non-parametric test"]]
-    if (!is.na(npt_value) && npt_value != "NA") {
-      npt_node <- paste0("NPT", clean_str(npt_value))
-      edge_npt <- sprintf('  %s --> %s["%s"]\n', pt_node, npt_node, npt_value)
-      edges[[length(edges) + 1]] <- edge_npt
-    }
+data_wide_read_vars  <- data_wide_read
+data_wide_read_names <- data_wide_read
+
+# Make unique values in each column factors with labels A, B, C, etc. and concatenate them with the previous column to create unique identifiers for each row
+for (c in 1:n.coll){
+  data_wide_read_vars[,c] <- factor( data_wide_read_vars[,c], 
+                                     labels = LETTERS[1:length(unique(data_wide_read_vars[,c]))] )
+  if (c >= 2){
+    data_wide_read_vars[,c] <- paste0(data_wide_read_vars[,c-1], data_wide_read_vars[,c])
   }
 }
 
-# Get unique edges
-unique_edges <- unique(unlist(edges))
+# Replace empty strings with NA
+data_wide_read_vars[data_wide_read == ""] <- NA
 
 # Write to file
-cat("flowchart LR\n", file = "output2.mmd")
-cat(unique_edges, sep = "", file = "output2.mmd", append = TRUE)
+file.name <- "looped_Output.mmd"
+cat("flowchart LR\n\n", file = file.name)
+
+# Crawl through the data frame to crate mermaid syntax for flowchart decision nodes
+for (r in 1:n.row){
+  for (c in 2:n.coll){
+    if (!is.na(data_wide_read_vars[r,c])){ # Skip NA values
+      if (r == 1 & c < n.coll - 1)  { cat( sprintf("%s -->|%s| ", data_wide_read_vars[r,c-1], data_wide_read_vars[r,c]) ,sep = "", file = file.name, append = TRUE) }
+      # If this node is the same as the node in the previous row, skip it
+      if (c > 1 & c < n.coll - 1) {
+      right     <- data_wide_read_vars[r  ,c]
+      right.top <- data_wide_read_vars[r-1,c]
+      # If cel to the righ is NA, print the node
+      # If cel to the right is text compare to cell above. If different, print the node
+      if (ifelse(is.na(right), TRUE, ifelse(is.na(right.top), TRUE, right != right.top)) & r > 1){
+        # not for last 2 colums and not if privious node is NA
+        if (c < n.coll - 1 & !is.na(data_wide_read_vars[r,c-1]))  { cat( sprintf("%s -->|%s| ", data_wide_read_vars[r,c-1], data_wide_read_vars[r,c]) ,sep = "", file = file.name, append = TRUE) }
+      }
+      }
+      if (c == n.coll - 1) { cat( sprintf("%s",        data_wide_read_vars[r,c]) ,sep = "", file = file.name, append = TRUE) }
+      if (c == n.coll)     { cat( sprintf(" --> %s",   data_wide_read_vars[r,c]) ,sep = "", file = file.name, append = TRUE) }
+      }
+  }
+      cat( "\n", sep = "", file = file.name, append = TRUE)
+}
+
+
+
+# cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT, PT2NPT,
+#     "\nsubgraph Parametric Tests\n",
+#     paste0(data_wide_read$PT,collapse = "\n"),
+#     "\nend\n",
+#     "subgraph Non Parametric Tests\n",
+#     paste0(grep("NPTNA", data_wide_read$NPT, value = TRUE, invert = TRUE), collapse = "\n"), 
+#     "\nend\n"
+#     ,sep = "", file = file.name, append = TRUE)
+
+
+# cbind(paste0(data_wide_read_vars$IV.number, "-->", ifelse(!is.na(data_wide_read_vars$IV.type), paste0("|",data_wide_read_vars$IV.type,"| "), "" )),
+
+# ifelse(!is.na(data_wide_read_vars$IV.type), data_wide_read_vars$IV.type, ""))
+
+
+# number --> conditional on
+
+
+
+

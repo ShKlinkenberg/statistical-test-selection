@@ -4,14 +4,14 @@ flowchart LR
   DVnOne -->|Continuous| DVnOneContinuous{#IV}
   DVnOne -->|Categorical| DVnOneCategorical{#IV}
   DVnTwoormore -->|Continuous| DVnTwoormoreContinuous{#IV}
-  DVnOneContinuous -->|None| DVnOneContinuousNone{IV<br>type}
+  DVnOneContinuous -->|None| PTOne-sampleT-test["One-sample T-test"]
   DVnOneContinuous -->|One| DVnOneContinuousOne{IV<br>type}
   DVnOneContinuous -->|Two or more| DVnOneContinuousTwoormore{IV<br>type}
   DVnOneCategorical -->|One| DVnOneCategoricalOne{IV<br>type}
   DVnOneCategorical -->|Two or more| DVnOneCategoricalTwoormore{IV<br>type}
   DVnTwoormoreContinuous -->|One| DVnTwoormoreContinuousOne{IV<br>type}
   DVnTwoormoreContinuous -->|Two or more| DVnTwoormoreContinuousTwoormore{IV<br>type}
-  DVnOneContinuousNone -->| | DVnOneContinuousNoneNA{#Cat}
+
   DVnOneContinuousOne -->|Continuous| DVnOneContinuousOneContinuous{#Cat}
   DVnOneContinuousOne -->|Categorical| DVnOneContinuousOneCategorical{#Cat}
   DVnOneContinuousTwoormore -->|Continuous| DVnOneContinuousTwoormoreContinuous{#Cat}
@@ -25,7 +25,7 @@ flowchart LR
   DVnTwoormoreContinuousOne -->|Categorical| DVnTwoormoreContinuousOneCategorical{#Cat}
   DVnTwoormoreContinuousTwoormore -->|Categorical| DVnTwoormoreContinuousTwoormoreCategorical{#Cat}
   DVnTwoormoreContinuousTwoormore -->|Both| DVnTwoormoreContinuousTwoormoreBoth{#Cat}
-  DVnOneContinuousNoneNA -->| | DVnOneContinuousNoneNANA{Samp}
+
   DVnOneContinuousOneContinuous -->| | DVnOneContinuousOneContinuousNA{Samp}
   DVnOneContinuousOneCategorical -->|Two| DVnOneContinuousOneCategoricalTwo{Samp}
   DVnOneContinuousOneCategorical -->|More than two| DVnOneContinuousOneCategoricalMorethantwo{Samp}
@@ -40,7 +40,7 @@ flowchart LR
   DVnTwoormoreContinuousOneCategorical -->| | DVnTwoormoreContinuousOneCategoricalNA{Samp}
   DVnTwoormoreContinuousTwoormoreCategorical -->| | DVnTwoormoreContinuousTwoormoreCategoricalNA{Samp}
   DVnTwoormoreContinuousTwoormoreBoth -->| | DVnTwoormoreContinuousTwoormoreBothNA{Samp}
-  DVnOneContinuousNoneNANA -->| | PTOne-sampleT-test["One-sample T-test"]
+
   DVnOneContinuousOneContinuousNA -->| | PTPearsoncorrelationorregression["Pearson correlation or regression"]
   DVnOneContinuousOneCategoricalTwo -->|Repeated| PTPaired-samplesT-testDependentT-test["Paired-samples T-test (Dependent T-test)"]
   DVnOneContinuousOneCategoricalTwo -->|Independent| PTIndependentT-testorPointbiserialcorrelation["Independent T-test or Pointbiserial correlation"]
