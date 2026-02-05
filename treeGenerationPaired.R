@@ -86,3 +86,5 @@ cat("flowchart LR\n",
     file = "outputPaired.mmd",
     append = FALSE)
 
+# find replace unique ids with original labels
+# data_wide_read_names[data_wide_read_vars == "AABBCBC"]
