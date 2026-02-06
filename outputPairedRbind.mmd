@@ -1,8 +1,17 @@
 flowchart LR
-  A{"#DV"} -->|"AA"| AA
-  AA{"DV<br>type"} -->|"AAB"| AAB
-  AAB{"#IV"} -->|"AABA"| AABA
-  AAB{"#IV"} -->|"AABB"| AABB
-  AABA{"IV<br>type"} -->|"AABAAAAM"| AABAAAAM
-  AABB{"IV<br>type"} -->|"AABBD"| AABBD
-  AABBD{"#Cat"} -->|"AABBDAAR"| AABBDAAR
+  A{"#DV"} -->|"One"| AA
+  AA{"DV<br>type"} -->|"Continuous"| AAB
+  AAB{"#IV"} -->|"None"| AABA
+  AAB{"#IV"} -->|"One"| AABB
+  AABA{"IV<br>type"} -->|"One-sample T-test"| AABAAAAM
+  AABB{"IV<br>type"} -->|"Continuous"| AABBD
+  AABB{"IV<br>type"} -->|"Categorical"| AABBC
+  AABB{"#Cat"} -->|"Categorical"| AABBC
+  AABBD{"#Cat"} -->|"Pearson correlation or regression"| AABBDAAR
+  AABBC{"#Cat"} -->|"Two"| AABBCC
+  AABBC{"Samp"} -->|"Two"| AABBCC
+  AABBCC{"Samp"} -->|"Repeated"| AABBCCD
+  AABBCC{"Samp"} -->|"Independent"| AABBCCC
+  AABBCC{"PT"} -->|"Independent"| AABBCCC
+  AABBCCD{"PT"} -->|"Paired-samples T-test (Dependent T-test)"| AABBCCDP
+  AABBCCC{"PT"} -->|"Independent T-test or Pointbiserial correlation"| AABBCCCE
