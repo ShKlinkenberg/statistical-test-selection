@@ -12,7 +12,7 @@ mmd_decision_node_names <- c("#DV", "DV<br>type", "#IV", "IV<br>type", "#Cat", "
 
 # Get number of columns and rows in the data frame
 n.coll <- ncol(data_wide_read)
-n.row  <- nrow(data_wide_read)
+n.row  <- 2; #nrow(data_wide_read)
 
 data_wide_read_vars  <- data_wide_read
 data_wide_read_names <- data_wide_read
@@ -39,7 +39,8 @@ results <- vector()
 
 # Crawl through the data frame to crate mermaid syntax for flowchart decision nodes
 for (c in 1:(n.coll - 2)){
-    pairs <- data.frame(matrix(NA, nrow = n.row, ncol = 2))
+    # Set data frame to store pairs of values for the current column and the next column
+    pairs <- cbind(character(), character())
     for (r in 1:n.row){
     first  <- data_wide_read_vars[r,c]
     second <- data_wide_read_vars[r,c+1]
@@ -49,32 +50,41 @@ for (c in 1:(n.coll - 2)){
         # Search for next value that is not NA
         next.col <- c + 1
         while (is.na(data_wide_read_vars[r, next.col])) { next.col = next.col + 1;  second <- data_wide_read_vars[r, next.col] }
-        pairs[r,] <- c(first, second)
-
+        
+        pairs <- rbind(pairs, c(first, second)) # Add a new row to the pairs data frame
+        label.col <- next.col
       }      
         
       # Check if both are not NA
         if (!is.na(first) & !is.na(second)) {
           # Search for pairs that are not NA
 
-          pairs[r,] <- c(first, second)
+          pairs <- rbind(pairs, c(first, second)) # Add a new row to the pairs data frame
+          label.col <- c
         }
       
-      pairs <- pairs[complete.cases(pairs), ]
+      # pairs <- unique(pairs) # Remove duplicate rows from the pairs data frame
+      
       # Only further process if there are pairs found
         if(nrow(pairs) != 0) {
+
+          # find <- data_wide_read_names[data_wide_read_vars == pairs[,2]]
+          # find <- find[!is.na(find)]
+
           new_value <- unique( sprintf('  %s{"%s"} -->|"%s"| %s\n', 
                                       pairs[,1],
                                       mmd_decision_node_names[c], 
-                                        #  data_wide_read_names[r,c],
-                                      pairs[,2], 
+                                      # data_wide_read_names[r,c],
+                                      # find
+                                      # pairs[,2], 
                                       pairs[,2] ) )
+        }
         
         results <- append(results, new_value)
-        }
 
-    } # stop looping through rows
-        
+
+        } # stop looping through rows
+  
 } # Stop looping through columns
 
 results <- unique(results)
@@ -82,8 +92,9 @@ results <- unique(results)
 cat("flowchart LR\n",
     results,
     sep = "",
-    file = "outputPaired.mmd",
+    file = "outputPairedRbind.mmd",
     append = FALSE)
 
 # find replace unique ids with original labels
-# data_wide_read_names[data_wide_read_vars == "AABBCBC"]
+find <- data_wide_read_names[data_wide_read_vars == "AABBCBC"]
+find <- find[!is.na(find)]
