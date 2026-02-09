@@ -1,0 +1,39 @@
+flowchart LR
+AABAAAAM["One-sample T-test"] --> AABAAAAME["Bootstrapped T-test"]
+AABBDAAR["Pearson correlation or regression"] --> AABBDAARB["Bootstrap correlation/regression, Spearman correlation, Kendall's tau"]
+AABBCCDP["Paired-samples T-test (Dependent T-test)"] --> AABBCCDPG["Bootstrapped T-test or Wilcoxon signed-rank test"]
+AABBCCCE["Independent T-test or Pointbiserial correlation"] --> AABBCCCEF["Bootstrapped T-test or Mann-Whitney test"]
+AABBCBDO["One-way repeated measures ANOVA"] --> AABBCBDOC["Bootstrapped ANOVA or Friedman's ANOVA"]
+AABBCBCN["One-way independent ANOVA"] --> AABBCBCNI["Robust ANOVA or Kruskal-Wallis test"]
+AABCDAAK["Multiple regression"] --> AABCDAAKD["Bootstrapped multiple regression"]
+AABCCADC["Factorial repeated measures ANOVA"] --> AABCCADCK["Robust factorial repeated measures ANOVA"]
+AABCCACD["Independent factorial ANOVA/multiple regression"] --> AABCCACDL["Robust independent factorial ANOVA/multiple regression"]
+AABCCABB["Factorial mixed ANOVA"] --> AABCCABBJ["Robust factorial mixed ANOVA"]
+AABCBAAL["Multiple regression/ANCOVA"] --> AABCBAALH["Robust ANCOVA/bootstrapped regression"]
+AAABDAAG["Logistic regression or biserial/point biserialcorrelation"]
+AAABCACQ["Pearson chi-square or likelihood ratio"]
+AAACDAAF["Logistic regression"]
+AAACCACH["Loglinear analysis"]
+AAACBACF["Logistic regression"]
+ABBBCACJ["MANOVA"]
+ABBCCACA["Factorial MANOVA"]
+ABBCBAAI["MANCOVA"]
+AAB{"#IV"} -->|"None"| AABAAAAM
+AABB{"IV<br>type"} -->|"Continuous"| AABBDAAR
+AABBCC{"Samp"} -->|"Repeated"| AABBCCDP
+AABBCC{"Samp"} -->|"Independent"| AABBCCCE
+AABBCB{"Samp"} -->|"Repeated"| AABBCBDO
+AABBCB{"Samp"} -->|"Independent"| AABBCBCN
+AABC{"IV<br>type"} -->|"Continuous"| AABCDAAK
+AABCC{"Samp"} -->|"Repeated"| AABCCADC
+AABCC{"Samp"} -->|"Independent"| AABCCACD
+AABCC{"Samp"} -->|"Both"| AABCCABB
+AABC{"IV<br>type"} -->|"Both"| AABCBAAL
+AAAB{"IV<br>type"} -->|"Continuous"| AAABDAAG
+AAABC{"Samp"} -->|"Independent"| AAABCACQ
+AAAC{"IV<br>type"} -->|"Continuous"| AAACDAAF
+AAACC{"Samp"} -->|"Independent"| AAACCACH
+AAACB{"Samp"} -->|"Independent"| AAACBACF
+ABBBC{"Samp"} -->|"Independent"| ABBBCACJ
+ABBCC{"Samp"} -->|"Independent"| ABBCCACA
+ABBC{"IV<br>type"} -->|"Both"| ABBCBAAI
