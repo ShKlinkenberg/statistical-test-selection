@@ -80,7 +80,7 @@ results <- append(results, prev2pt)
 
 
 
-xmin1 <- paste0(coll.vars, '{"',mmd_decision_node_names[coll.numbers],'"} -->|"', coll.names, '"| ', before.prev.var, "\n")
+xmin1 <- paste0(before.before.prev.var, '{"',mmd_decision_node_names[coll.numbers],'"} -->|"', coll.names, '"| ', before.prev.var, "\n")
 xmin1 <- unique(xmin1)
 
 # results <- append(results, xmin1)
