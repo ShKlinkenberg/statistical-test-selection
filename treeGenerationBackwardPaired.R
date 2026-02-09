@@ -47,6 +47,7 @@ results <- append(results, pt2npt)
 # X --> PT
 pt <- n.coll - 1
 
+
 # Get column numbers of the first previwous column with non-NA value
 second <- data_wide_read_vars[, pt]
 coll.numbers <- vector()
@@ -54,6 +55,7 @@ coll.vars    <- vector()
 coll.names   <- vector()
 before.prev.var <- vector()
 before.prev.col <- vector()
+before.before.prev.var <- vector()
 for (r in 1:n.row) {
 prev.col <- pt - 1 # Start with the column before PT
 # Find previous
@@ -61,8 +63,8 @@ while (is.na(data_wide_read_vars[r, prev.col])) { prev.col = prev.col - 1;  }
 
 # print(c(r, prev.col))
 coll.numbers[r] <- prev.col;
-coll.vars[r] <- data_wide_read_vars[r, prev.col]   # First col variables
-coll.names[r] <- data_wide_read_names[r, prev.col] # First col names
+coll.vars[r]    <- data_wide_read_vars[r, prev.col]  # First col variables
+coll.names[r]   <- data_wide_read_names[r, prev.col] # First col names
 
 prev.prev.col <- prev.col - 1 # Start with the column before the previous
 # Find one before previous
@@ -75,13 +77,29 @@ prev2pt <- paste0(before.prev.var, '{"',mmd_decision_node_names[coll.numbers],'"
 prev2pt <- unique(prev2pt)
 
 results <- append(results, prev2pt)
+  
+
 
 # # X - 1 # -------------------------------------------------- #
 
+# before.before.prev.col <- vector()
+# before.before.prev.var <- vector()
 
+# for (r in 1:n.row) {
+# prev.col <- before.prev.col - 1
+#  # Start with the column before PT
+# # Find previous
+# while (is.na(data_wide_read_vars[r, prev.col[r]])) { prev.col[r] = prev.col[r] - 1;  }
+# before.before.prev.col[r] <- prev.col[r]
+# before.before.prev.var[r] <- data_wide_read_vars[r, prev.col[r]]
+# coll.names[r]   <- data_wide_read_names[r, prev.col[r]] # First col names
+# }
 
-xmin1 <- paste0(before.before.prev.var, '{"',mmd_decision_node_names[coll.numbers],'"} -->|"', coll.names, '"| ', before.prev.var, "\n")
-xmin1 <- unique(xmin1)
+# before.before.prev.col
+# before.before.prev.var
+
+# xmin1 <- paste0(before.before.prev.var, '{"',mmd_decision_node_names[before.prev.col+1],'"} -->|"', coll.names, '"| ', before.prev.var, "\n")
+# xmin1 <- unique(xmin1)
 
 # results <- append(results, xmin1)
 
@@ -159,3 +177,4 @@ cat("flowchart LR\n",
 # find replace unique ids with original labels
 # find <- data_wide_read_names[data_wide_read_vars == "AABBCBC"]
 # find <- find[!is.na(find)]
+  
