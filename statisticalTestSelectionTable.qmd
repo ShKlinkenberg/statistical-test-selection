@@ -11,7 +11,7 @@ data_wide_read <- read_csv2("test_selection_scheme_wide.csv")
 
 
 ```{r}
-#| column: screen
+#| column: screen-inset
 
 # install.packages("DT")
 library(DT)

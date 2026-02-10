@@ -1,12 +1,12 @@
 DV number;DV type;IV number;IV type;IV categories;Sampled;Parametric Test;Non-parametric test
 One;Continuous;None;;;;One-sample T-test;Bootstrapped T-test
 One;Continuous;One;Continuous;;;Pearson correlation or regression;Bootstrap correlation/regression, Spearman correlation, Kendall's tau
-One;Continuous;One;Categorical;Two;Repeated;Paired-samples T-test (Dependent T-test);Bootstrapped T-test or Wilcoxon signed-rank test
+One;Continuous;One;Categorical;Two;Dependent;Paired-samples T-test (Dependent T-test);Bootstrapped T-test or Wilcoxon signed-rank test
 One;Continuous;One;Categorical;Two;Independent;Independent T-test or Pointbiserial correlation;Bootstrapped T-test or Mann-Whitney test
-One;Continuous;One;Categorical;More than two;Repeated;One-way repeated measures ANOVA;Bootstrapped ANOVA or Friedman's ANOVA
+One;Continuous;One;Categorical;More than two;Dependent;One-way repeated measures ANOVA;Bootstrapped ANOVA or Friedman's ANOVA
 One;Continuous;One;Categorical;More than two;Independent;One-way independent ANOVA;Robust ANOVA or Kruskal-Wallis test
 One;Continuous;Two or more;Continuous;;;Multiple regression;Bootstrapped multiple regression
-One;Continuous;Two or more;Categorical;;Repeated;Factorial repeated measures ANOVA;Robust factorial repeated measures ANOVA
+One;Continuous;Two or more;Categorical;;Dependent;Factorial repeated measures ANOVA;Robust factorial repeated measures ANOVA
 One;Continuous;Two or more;Categorical;;Independent;Independent factorial ANOVA/multiple regression;Robust independent factorial ANOVA/multiple regression
 One;Continuous;Two or more;Categorical;;Both;Factorial mixed ANOVA;Robust factorial mixed ANOVA
 One;Continuous;Two or more;Both;;;Multiple regression/ANCOVA;Robust ANCOVA/bootstrapped regression
