@@ -122,8 +122,11 @@ nonparametric_node_ids <- edges |>
   pull(to_id) |>
   unique()
 
+# Set the yaml header for mermaid configuration
+mermaid_lines <- c("---","config:","  look: handDrawn", "  theme: neutral", "---\n")
+
 # Build mermaid output
-mermaid_lines <- c("graph LR")
+mermaid_lines <- c(mermaid_lines, "graph LR")
 
 # Decision node definitions
 decision_defs <- nodes |>
