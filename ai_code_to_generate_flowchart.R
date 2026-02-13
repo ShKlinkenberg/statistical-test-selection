@@ -11,6 +11,15 @@ df <- read_delim(
   na = c("", "NA")
 )
 
+names(df) <- c("#DV",
+               "DV<br>type",
+               "#IV",
+               "IV<br>type",
+               "IV<br>cat",
+               "Samp",
+               "Parametric Test",
+               "Non-parametric test")
+
 # Identify decision columns (all except the last two) and result columns
 col_names <- names(df)
 n_cols <- length(col_names)
@@ -173,7 +182,10 @@ edge_defs <- edges |>
 
 
 
-mermaid_lines <- c(mermaid_lines, edge_defs)
+mermaid_lines <- c(mermaid_lines, edge_defs,
+                  '',
+                  '    style parametric_tests fill:#cce5ff,stroke:#333',
+                  '    style nonparametric_tests fill:#d4edda,stroke:#333')
 
 # Write to file
 mermaid_output <- paste(mermaid_lines, collapse = "\n")
