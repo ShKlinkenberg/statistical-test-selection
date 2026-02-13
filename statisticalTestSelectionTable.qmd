@@ -5,13 +5,19 @@ layout: column-page
 
 
 ```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
 library("readr")
 data_wide_read <- read_csv2("test_selection_scheme_wide.csv")
 ```
 
+## Statistical test selection table
 
 ```{r}
 #| column: screen-inset
+#| echo: false
 
 # install.packages("DT")
 library(DT)
@@ -28,166 +34,15 @@ datatable(
 )
 ```
 
-Create decision tree
+# Decision tree flowchart
 
-
-```{r}
+<!--
+```{mermaid}
+#| echo: false
 #| eval: false
-
-col_names <- names(data_wide_read)
-
-# Creat variables for mermaid syntax for flowchart decision nodes
-mmd_decision_node_var <- c("DVn", "DVt", "IVn", "IVt", "IVc", "Samp", "PT", "NPT")
-
-# Creat shortened mermaid syntax for flowchart decision nodes
-mmd_decision_node_names <- c("DV#", "DV<br>type", "#IV", "IV<br>type", "#Cat", "Samp")
-
-# Add varible names to dataframe
-# Add mmd_decision_node_var and romove spaces
-data_wide_read$DVn <- paste0(mmd_decision_node_var[1], gsub(" ","",data_wide_read$'DV number') )
-
-# Do the same for the other decision nodes
-data_wide_read$DVt  <- paste0(data_wide_read$DVn, gsub(" ","",data_wide_read$'DV type') )
-data_wide_read$IVn  <- paste0(data_wide_read$DVt, gsub(" ","",data_wide_read$'IV number') )
-data_wide_read$IVt  <- paste0(data_wide_read$IVn, gsub(" ","",data_wide_read$'IV type') )
-data_wide_read$IVc  <- paste0(data_wide_read$IVt, gsub(" ","",data_wide_read$'IV categories') )
-data_wide_read$Samp <- paste0(data_wide_read$IVc, gsub(" ","",data_wide_read$'Sampled') )
-data_wide_read$PT   <- paste0(mmd_decision_node_var[7], gsub(" |\\(|\\)","",data_wide_read$'Parametric Test') )
-data_wide_read$NPT  <- paste0(mmd_decision_node_var[8], gsub(" ","",data_wide_read$'Non-parametric test') )
-
-DVn2DVt <- unique(
-sprintf("  DVn{#DV} -->|%s| %s{%s}\n",
-        data_wide_read$'DV number', # Node #DV
-        data_wide_read$DVn,
-        mmd_decision_node_names[2]) # Node DV type
-)
-
-DVt2IVn <- unique(
-sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$DVn,         # node DV type
-        data_wide_read$'DV type',
-        data_wide_read$DVt,
-        mmd_decision_node_names[3]) # node #IV
-        )
-
-IVn2IVt <- unique(
-sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$DVt,         # node #IV
-        data_wide_read$'IV number', # match
-        data_wide_read$IVn,         # match
-        mmd_decision_node_names[4]) # node IV type
-        )
-
-IVt2IVc <- unique(
-sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$IVn,             # node IV type
-        data_wide_read$'IV type',       # match
-        data_wide_read$IVt,             # match
-        mmd_decision_node_names[5])     # node IV categories
-        )
-
-IVc2IVs <- unique(
-sprintf("  %s -->|%s| %s{%s}\n",
-        data_wide_read$IVt,
-        data_wide_read$'IV categories', # match
-        data_wide_read$IVc,             # match
-        mmd_decision_node_names[6])     # node IV sampled
-        )
-
-IVs2PT <- unique(
-sprintf('  %s -->|%s| %s["%s"]\n',
-        data_wide_read$IVc,
-        data_wide_read$'Sampled',      # match
-        data_wide_read$PT,                # match
-        data_wide_read$'Parametric Test') # match
-        )
-
-PT2NPT <- unique(
-sprintf('  %s --> %s["%s"]\n',
-        data_wide_read$PT,
-        data_wide_read$NPT,                   # match
-        data_wide_read$'Non-parametric test') # match
-        )
-
-DVn2DVt
-DVt2IVn
-IVn2IVt
-IVt2IVc <- gsub("\\|NA\\|", "| |", IVt2IVc)
-IVc2IVs <- gsub("\\|NA\\|", "| |", IVc2IVs)
-IVs2PT  <- gsub("\\|NA\\|", "| |", IVs2PT)
-PT2NPT  <- grep("NA", PT2NPT, value = TRUE, invert = TRUE)
-
-grep("NA", IVt2IVc, value = TRUE)
-
-
-
-cat("flowchart LR\n", file = "output.mmd")
-
-cat(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT, PT2NPT,
-    "\nsubgraph Parametric Tests\n",
-    paste0(data_wide_read$PT,collapse = "\n"),
-    "\nend\n",
-    "subgraph Non Parametric Tests\n",
-    paste0(grep("NPTNA", data_wide_read$NPT, value = TRUE, invert = TRUE), collapse = "\n"), 
-    "\nend\n",
-    sep = "",
-    file = "output.mmd",
-    append = TRUE)
-
+#| file: test_selection_flowchart.mmd
 ```
 
+-->
 
-
-```{r}
-data_wide_read <- read.csv2("test_selection_scheme_wide.csv")
-
-n.cols <- 1:7
-DVn  <- gsub(" |\\(|\\)","",unique(data_wide_read[,1]) )
-DVt  <- gsub(" |\\(|\\)","",unique(data_wide_read[,2]) )
-IVn  <- gsub(" |\\(|\\)","",unique(data_wide_read[,3]) )
-IVt  <- gsub(" |\\(|\\)","",unique(data_wide_read[,4]) )
-IVc  <- gsub(" |\\(|\\)","",unique(data_wide_read[,5]) )
-Samp <- gsub(" |\\(|\\)","",unique(data_wide_read[,6]) )
-PT   <- gsub(" |\\(|\\)","",unique(data_wide_read[,7]) )
-
-# skipNode <- function(edge_label, node_to) {
-    
-#     # If edge_label is not NA, then skip this node
-#     if (!edge_label == "") { return( sprintf("|%s| ", edge_label) ) } else { return( "" ) }
-
-# }
-
-i = 1
-for (a in DVn) {
-
-    print( sprintf("  DVn{#DV} -->|%s| DVn%s", a, a) ) 
-    for (b in IVc) {
-        print( sprintf("  DVn%s -->", a ) )
-        # edge label
-        if (b != "") { print( sprintf("|%s| ", b) ) }
-        for (c in Samp) {
-              # If no edge then blank
-              # if edge than first finish node to previous edge
-              if (c != "") { print( sprintf("%s%s%s\n", a, b, c) ) }
-              # Next new node and next edge
-              if (c != "") { print( sprintf("%s%s%s -->|%s| ", a, b, c, c) ) }
-              print( sprintf(" %s\n", PT[i]) ) 
-              i = i + 1
-        }
-    }
-}
-
-
-
-
-
-
-# DVn2DVt <- unique(
-# sprintf("  DVn{#DV} -->|%s| %s{%s}\n",
-#         data_wide_read$'DV number', # Node #DV
-#         data_wide_read$DVn,
-#         mmd_decision_node_names[2]) # Node DV type
-# )
-
-
-```
+![Flowchart of the decision tree for statistical test selection](test_selection_flowchart.svg)

@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -70,6 +35,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="statisticalTestSelectionTable_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="statisticalTestSelectionTable_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="statisticalTestSelectionTable_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="statisticalTestSelectionTable_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script src="statisticalTestSelectionTable_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link href="statisticalTestSelectionTable_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <link href="statisticalTestSelectionTable_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="statisticalTestSelectionTable_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="statisticalTestSelectionTable_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
@@ -113,262 +81,160 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readr"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_wide_read <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"test_selection_scheme_wide.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 19 Columns: 8
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ";"
-chr (8): DV number, DV type, IV number, IV type, IV categories, Sampled, Par...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
+<section id="statistical-test-selection-table" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="statistical-test-selection-table">Statistical test selection table</h2>
 <div class="cell page-columns page-full">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("DT")</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  data_wide_read,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter =</span> <span class="st">"top"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="dv">25</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">dom =</span> <span class="st">"ltipr"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollX =</span> <span class="cn">TRUE</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display column-screen-inset">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-5851ce0818d4e02e7024" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5851ce0818d4e02e7024">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["One","One","One","One","One","One","One","One","One","One","One","One","One","One","One","One","Two or more","Two or more","Two or more"],["Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Categorical","Categorical","Categorical","Categorical","Categorical","Continuous","Continuous","Continuous"],["None","One","One","One","One","One","Two or more","Two or more","Two or more","Two or more","Two or more","One","One","Two or more","Two or more","Two or more","One","Two or more","Two or more"],[null,"Continuous","Categorical","Categorical","Categorical","Categorical","Continuous","Categorical","Categorical","Categorical","Both","Continuous","Categorical","Continuous","Categorical","Both","Categorical","Categorical","Both"],[null,null,"Two","Two","More than two","More than two",null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,"Dependent","Independent","Dependent","Independent",null,"Dependent","Independent","Both",null,null,"Independent",null,"Independent","Independent","Independent","Independent",null],["One-sample T-test","Pearson correlation or regression","Paired-samples T-test (Dependent T-test)","Independent T-test or Pointbiserial correlation","One-way repeated measures ANOVA","One-way independent ANOVA","Multiple regression","Factorial repeated measures ANOVA","Independent factorial ANOVA/multiple regression","Factorial mixed ANOVA","Multiple regression/ANCOVA","Logistic regression or biserial/point biserialcorrelation","Pearson chi-square or likelihood ratio","Logistic regression","Loglinear analysis","Logistic regression","MANOVA","Factorial MANOVA","MANCOVA"],["Bootstrapped T-test","Bootstrap correlation/regression, Spearman correlation, Kendall's tau","Bootstrapped T-test or Wilcoxon signed-rank test","Bootstrapped T-test or Mann-Whitney test","Bootstrapped ANOVA or Friedman's ANOVA","Robust ANOVA or Kruskal-Wallis test","Bootstrapped multiple regression","Robust factorial repeated measures ANOVA","Robust independent factorial ANOVA/multiple regression","Robust factorial mixed ANOVA","Robust ANCOVA/bootstrapped regression",null,null,null,null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>DV number<\/th>\n      <th>DV type<\/th>\n      <th>IV number<\/th>\n      <th>IV type<\/th>\n      <th>IV categories<\/th>\n      <th>Sampled<\/th>\n      <th>Parametric Test<\/th>\n      <th>Non-parametric test<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":25,"dom":"ltipr","scrollX":true,"columnDefs":[{"name":"DV number","targets":0},{"name":"DV type","targets":1},{"name":"IV number","targets":2},{"name":"IV type","targets":3},{"name":"IV categories","targets":4},{"name":"Sampled","targets":5},{"name":"Parametric Test","targets":6},{"name":"Non-parametric test","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2587946d27b7875e0a87" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2587946d27b7875e0a87">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["One","One","One","One","One","One","One","One","One","One","One","One","One","One","One","One","Two or more","Two or more","Two or more"],["Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Continuous","Categorical","Categorical","Categorical","Categorical","Categorical","Continuous","Continuous","Continuous"],["None","One","One","One","One","One","Two or more","Two or more","Two or more","Two or more","Two or more","One","One","Two or more","Two or more","Two or more","One","Two or more","Two or more"],[null,"Continuous","Categorical","Categorical","Categorical","Categorical","Continuous","Categorical","Categorical","Categorical","Both","Continuous","Categorical","Continuous","Categorical","Both","Categorical","Categorical","Both"],[null,null,"Two","Two","More than two","More than two",null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,"Dependent","Independent","Dependent","Independent",null,"Dependent","Independent","Both",null,null,"Independent",null,"Independent","Independent","Independent","Independent",null],["One-sample T-test","Pearson correlation or regression","Paired-samples T-test (Dependent T-test)","Independent T-test or Pointbiserial correlation","One-way repeated measures ANOVA","One-way independent ANOVA","Multiple regression","Factorial repeated measures ANOVA","Independent factorial ANOVA/multiple regression","Factorial mixed ANOVA","Multiple regression/ANCOVA","Logistic regression or biserial/point biserialcorrelation","Pearson chi-square or likelihood ratio","Logistic regression","Loglinear analysis","Logistic regression","MANOVA","Factorial MANOVA","MANCOVA"],["Bootstrapped T-test","Bootstrap correlation/regression, Spearman correlation, Kendall's tau","Bootstrapped T-test or Wilcoxon signed-rank test","Bootstrapped T-test or Mann-Whitney test","Bootstrapped ANOVA or Friedman's ANOVA","Robust ANOVA or Kruskal-Wallis test","Bootstrapped multiple regression","Robust factorial repeated measures ANOVA","Robust independent factorial ANOVA/multiple regression","Robust factorial mixed ANOVA","Robust ANCOVA/bootstrapped regression",null,null,null,null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>DV number<\/th>\n      <th>DV type<\/th>\n      <th>IV number<\/th>\n      <th>IV type<\/th>\n      <th>IV categories<\/th>\n      <th>Sampled<\/th>\n      <th>Parametric Test<\/th>\n      <th>Non-parametric test<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":25,"dom":"ltipr","scrollX":true,"columnDefs":[{"name":"DV number","targets":0},{"name":"DV type","targets":1},{"name":"IV number","targets":2},{"name":"IV type","targets":3},{"name":"IV categories","targets":4},{"name":"Sampled","targets":5},{"name":"Parametric Test","targets":6},{"name":"Non-parametric test","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p>Create decision tree</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">&lt;-</span> <span class="fu">names</span>(data_wide_read)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creat variables for mermaid syntax for flowchart decision nodes</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mmd_decision_node_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"DVn"</span>, <span class="st">"DVt"</span>, <span class="st">"IVn"</span>, <span class="st">"IVt"</span>, <span class="st">"IVc"</span>, <span class="st">"Samp"</span>, <span class="st">"PT"</span>, <span class="st">"NPT"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creat shortened mermaid syntax for flowchart decision nodes</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>mmd_decision_node_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"DV#"</span>, <span class="st">"DV&lt;br&gt;type"</span>, <span class="st">"#IV"</span>, <span class="st">"IV&lt;br&gt;type"</span>, <span class="st">"#Cat"</span>, <span class="st">"Samp"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add varible names to dataframe</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add mmd_decision_node_var and romove spaces</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>DVn <span class="ot">&lt;-</span> <span class="fu">paste0</span>(mmd_decision_node_var[<span class="dv">1</span>], <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'DV number'</span>) )</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Do the same for the other decision nodes</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>DVt  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(data_wide_read<span class="sc">$</span>DVn, <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'DV type'</span>) )</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>IVn  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(data_wide_read<span class="sc">$</span>DVt, <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'IV number'</span>) )</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>IVt  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(data_wide_read<span class="sc">$</span>IVn, <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'IV type'</span>) )</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>IVc  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(data_wide_read<span class="sc">$</span>IVt, <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'IV categories'</span>) )</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>Samp <span class="ot">&lt;-</span> <span class="fu">paste0</span>(data_wide_read<span class="sc">$</span>IVc, <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'Sampled'</span>) )</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>PT   <span class="ot">&lt;-</span> <span class="fu">paste0</span>(mmd_decision_node_var[<span class="dv">7</span>], <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'Parametric Test'</span>) )</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>data_wide_read<span class="sc">$</span>NPT  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(mmd_decision_node_var[<span class="dv">8</span>], <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">""</span>,data_wide_read<span class="sc">$</span><span class="st">'Non-parametric test'</span>) )</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>DVn2DVt <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"  DVn{#DV} --&gt;|%s| %s{%s}</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'DV number'</span>, <span class="co"># Node #DV</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>DVn,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        mmd_decision_node_names[<span class="dv">2</span>]) <span class="co"># Node DV type</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>DVt2IVn <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"  %s --&gt;|%s| %s{%s}</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>DVn,         <span class="co"># node DV type</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'DV type'</span>,</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>DVt,</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        mmd_decision_node_names[<span class="dv">3</span>]) <span class="co"># node #IV</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>IVn2IVt <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"  %s --&gt;|%s| %s{%s}</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>DVt,         <span class="co"># node #IV</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'IV number'</span>, <span class="co"># match</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>IVn,         <span class="co"># match</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        mmd_decision_node_names[<span class="dv">4</span>]) <span class="co"># node IV type</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>IVt2IVc <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"  %s --&gt;|%s| %s{%s}</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>IVn,             <span class="co"># node IV type</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'IV type'</span>,       <span class="co"># match</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>IVt,             <span class="co"># match</span></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>        mmd_decision_node_names[<span class="dv">5</span>])     <span class="co"># node IV categories</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>IVc2IVs <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"  %s --&gt;|%s| %s{%s}</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>IVt,</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'IV categories'</span>, <span class="co"># match</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>IVc,             <span class="co"># match</span></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>        mmd_decision_node_names[<span class="dv">6</span>])     <span class="co"># node IV sampled</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>IVs2PT <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">'  %s --&gt;|%s| %s["%s"]</span><span class="sc">\n</span><span class="st">'</span>,</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>IVc,</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'Sampled'</span>,      <span class="co"># match</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>PT,                <span class="co"># match</span></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'Parametric Test'</span>) <span class="co"># match</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>PT2NPT <span class="ot">&lt;-</span> <span class="fu">unique</span>(</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">'  %s --&gt; %s["%s"]</span><span class="sc">\n</span><span class="st">'</span>,</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>PT,</span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span>NPT,                   <span class="co"># match</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>        data_wide_read<span class="sc">$</span><span class="st">'Non-parametric test'</span>) <span class="co"># match</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>DVn2DVt</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>DVt2IVn</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>IVn2IVt</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>IVt2IVc <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">|NA</span><span class="sc">\\</span><span class="st">|"</span>, <span class="st">"| |"</span>, IVt2IVc)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>IVc2IVs <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">|NA</span><span class="sc">\\</span><span class="st">|"</span>, <span class="st">"| |"</span>, IVc2IVs)</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>IVs2PT  <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">|NA</span><span class="sc">\\</span><span class="st">|"</span>, <span class="st">"| |"</span>, IVs2PT)</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>PT2NPT  <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"NA"</span>, PT2NPT, <span class="at">value =</span> <span class="cn">TRUE</span>, <span class="at">invert =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">"NA"</span>, IVt2IVc, <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"flowchart LR</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="st">"output.mmd"</span>)</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(DVn2DVt, DVt2IVn, IVn2IVt, IVt2IVc, IVc2IVs, IVs2PT, PT2NPT,</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>    <span class="st">"</span><span class="sc">\n</span><span class="st">subgraph Parametric Tests</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(data_wide_read<span class="sc">$</span>PT,<span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>),</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"</span><span class="sc">\n</span><span class="st">end</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">"subgraph Non Parametric Tests</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="fu">grep</span>(<span class="st">"NPTNA"</span>, data_wide_read<span class="sc">$</span>NPT, <span class="at">value =</span> <span class="cn">TRUE</span>, <span class="at">invert =</span> <span class="cn">TRUE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>), </span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">"</span><span class="sc">\n</span><span class="st">end</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">""</span>,</span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"output.mmd"</span>,</span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="decision-tree-flowchart" class="level1">
+<h1>Decision tree flowchart</h1>
+<!--
+
+::::::{.cell layout-align="default"}
+
+:::::{.cell-output-display}
+
+::::{}
+`<figure class=''>`{=html}
+
+:::{}
+
+<pre class="mermaid mermaid-js">#| echo: false
+#| eval: false
+#| file: test_selection_flowchart.mmd
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+
+graph LR
+    DV{&quot;DV&quot;}
+    DV_One_DV_br_type{&quot;DV&lt;br&gt;type&quot;}
+    DV_One_DV_br_type_Continuous_IV{&quot;IV&quot;}
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type{&quot;IV&lt;br&gt;type&quot;}
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat{&quot;IV&lt;br&gt;cat&quot;}
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp{&quot;Samp&quot;}
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp{&quot;Samp&quot;}
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{&quot;IV&lt;br&gt;type&quot;}
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{&quot;Samp&quot;}
+    DV_One_DV_br_type_Categorical_IV{&quot;IV&quot;}
+    DV_One_DV_br_type_Categorical_IV_One_IV_br_type{&quot;IV&lt;br&gt;type&quot;}
+    DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp{&quot;Samp&quot;}
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type{&quot;IV&lt;br&gt;type&quot;}
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp{&quot;Samp&quot;}
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp{&quot;Samp&quot;}
+    DV_Two_or_more_DV_br_type{&quot;DV&lt;br&gt;type&quot;}
+    DV_Two_or_more_DV_br_type_Continuous_IV{&quot;IV&quot;}
+    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type{&quot;IV&lt;br&gt;type&quot;}
+    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp{&quot;Samp&quot;}
+    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{&quot;IV&lt;br&gt;type&quot;}
+    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{&quot;Samp&quot;}
+    subgraph parametric_tests[&quot;Parametric Tests&quot;]
+        One_sample_T_test[&quot;One-sample T-test&quot;]
+        Pearson_correlation_or_regression[&quot;Pearson correlation or regression&quot;]
+        Paired_samples_T_test_Dependent_T_test[&quot;Paired-samples T-test (Dependent T-test)&quot;]
+        Independent_T_test_or_Pointbiserial_correlation[&quot;Independent T-test or Pointbiserial correlation&quot;]
+        One_way_repeated_measures_ANOVA[&quot;One-way repeated measures ANOVA&quot;]
+        One_way_independent_ANOVA[&quot;One-way independent ANOVA&quot;]
+        Multiple_regression[&quot;Multiple regression&quot;]
+        Factorial_repeated_measures_ANOVA[&quot;Factorial repeated measures ANOVA&quot;]
+        Independent_factorial_ANOVA_multiple_regression[&quot;Independent factorial ANOVA/multiple regression&quot;]
+        Factorial_mixed_ANOVA[&quot;Factorial mixed ANOVA&quot;]
+        Multiple_regression_ANCOVA[&quot;Multiple regression/ANCOVA&quot;]
+        Logistic_regression_or_biserial_point_biserialcorrelation[&quot;Logistic regression or biserial/point biserialcorrelation&quot;]
+        Pearson_chi_square_or_likelihood_ratio[&quot;Pearson chi-square or likelihood ratio&quot;]
+        Logistic_regression[&quot;Logistic regression&quot;]
+        Loglinear_analysis[&quot;Loglinear analysis&quot;]
+        MANOVA[&quot;MANOVA&quot;]
+        Factorial_MANOVA[&quot;Factorial MANOVA&quot;]
+        MANCOVA[&quot;MANCOVA&quot;]
+    end
+    subgraph nonparametric_tests[&quot;Non-Parametric Tests&quot;]
+        Bootstrapped_T_test[&quot;Bootstrapped T-test&quot;]
+        Bootstrap_correlation_regression_Spearman_correlation_Kendall_s_tau[&quot;Bootstrap correlation/regression, Spearman correlation, Kendall&#39;s tau&quot;]
+        Bootstrapped_T_test_or_Wilcoxon_signed_rank_test[&quot;Bootstrapped T-test or Wilcoxon signed-rank test&quot;]
+        Bootstrapped_T_test_or_Mann_Whitney_test[&quot;Bootstrapped T-test or Mann-Whitney test&quot;]
+        Bootstrapped_ANOVA_or_Friedman_s_ANOVA[&quot;Bootstrapped ANOVA or Friedman&#39;s ANOVA&quot;]
+        Robust_ANOVA_or_Kruskal_Wallis_test[&quot;Robust ANOVA or Kruskal-Wallis test&quot;]
+        Bootstrapped_multiple_regression[&quot;Bootstrapped multiple regression&quot;]
+        Robust_factorial_repeated_measures_ANOVA[&quot;Robust factorial repeated measures ANOVA&quot;]
+        Robust_independent_factorial_ANOVA_multiple_regression[&quot;Robust independent factorial ANOVA/multiple regression&quot;]
+        Robust_factorial_mixed_ANOVA[&quot;Robust factorial mixed ANOVA&quot;]
+        Robust_ANCOVA_bootstrapped_regression[&quot;Robust ANCOVA/bootstrapped regression&quot;]
+    end
+    DV --&gt;|&quot;One&quot;| DV_One_DV_br_type
+    DV_One_DV_br_type --&gt;|&quot;Continuous&quot;| DV_One_DV_br_type_Continuous_IV
+    DV_One_DV_br_type_Continuous_IV --&gt;|&quot;None&quot;| One_sample_T_test
+    One_sample_T_test --&gt; Bootstrapped_T_test
+    DV_One_DV_br_type_Continuous_IV --&gt;|&quot;One&quot;| DV_One_DV_br_type_Continuous_IV_One_IV_br_type
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type --&gt;|&quot;Continuous&quot;| Pearson_correlation_or_regression
+    Pearson_correlation_or_regression --&gt; Bootstrap_correlation_regression_Spearman_correlation_Kendall_s_tau
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type --&gt;|&quot;Categorical&quot;| DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat --&gt;|&quot;Two&quot;| DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp --&gt;|&quot;Dependent&quot;| Paired_samples_T_test_Dependent_T_test
+    Paired_samples_T_test_Dependent_T_test --&gt; Bootstrapped_T_test_or_Wilcoxon_signed_rank_test
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp --&gt;|&quot;Independent&quot;| Independent_T_test_or_Pointbiserial_correlation
+    Independent_T_test_or_Pointbiserial_correlation --&gt; Bootstrapped_T_test_or_Mann_Whitney_test
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat --&gt;|&quot;More than two&quot;| DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp --&gt;|&quot;Dependent&quot;| One_way_repeated_measures_ANOVA
+    One_way_repeated_measures_ANOVA --&gt; Bootstrapped_ANOVA_or_Friedman_s_ANOVA
+    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp --&gt;|&quot;Independent&quot;| One_way_independent_ANOVA
+    One_way_independent_ANOVA --&gt; Robust_ANOVA_or_Kruskal_Wallis_test
+    DV_One_DV_br_type_Continuous_IV --&gt;|&quot;Two or more&quot;| DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type --&gt;|&quot;Continuous&quot;| Multiple_regression
+    Multiple_regression --&gt; Bootstrapped_multiple_regression
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type --&gt;|&quot;Categorical&quot;| DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp --&gt;|&quot;Dependent&quot;| Factorial_repeated_measures_ANOVA
+    Factorial_repeated_measures_ANOVA --&gt; Robust_factorial_repeated_measures_ANOVA
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp --&gt;|&quot;Independent&quot;| Independent_factorial_ANOVA_multiple_regression
+    Independent_factorial_ANOVA_multiple_regression --&gt; Robust_independent_factorial_ANOVA_multiple_regression
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp --&gt;|&quot;Both&quot;| Factorial_mixed_ANOVA
+    Factorial_mixed_ANOVA --&gt; Robust_factorial_mixed_ANOVA
+    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type --&gt;|&quot;Both&quot;| Multiple_regression_ANCOVA
+    Multiple_regression_ANCOVA --&gt; Robust_ANCOVA_bootstrapped_regression
+    DV_One_DV_br_type --&gt;|&quot;Categorical&quot;| DV_One_DV_br_type_Categorical_IV
+    DV_One_DV_br_type_Categorical_IV --&gt;|&quot;One&quot;| DV_One_DV_br_type_Categorical_IV_One_IV_br_type
+    DV_One_DV_br_type_Categorical_IV_One_IV_br_type --&gt;|&quot;Continuous&quot;| Logistic_regression_or_biserial_point_biserialcorrelation
+    DV_One_DV_br_type_Categorical_IV_One_IV_br_type --&gt;|&quot;Categorical&quot;| DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp
+    DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp --&gt;|&quot;Independent&quot;| Pearson_chi_square_or_likelihood_ratio
+    DV_One_DV_br_type_Categorical_IV --&gt;|&quot;Two or more&quot;| DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type --&gt;|&quot;Continuous&quot;| Logistic_regression
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type --&gt;|&quot;Categorical&quot;| DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp --&gt;|&quot;Independent&quot;| Loglinear_analysis
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type --&gt;|&quot;Both&quot;| DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp
+    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp --&gt;|&quot;Independent&quot;| Logistic_regression
+    DV --&gt;|&quot;Two or more&quot;| DV_Two_or_more_DV_br_type
+    DV_Two_or_more_DV_br_type --&gt;|&quot;Continuous&quot;| DV_Two_or_more_DV_br_type_Continuous_IV
+    DV_Two_or_more_DV_br_type_Continuous_IV --&gt;|&quot;One&quot;| DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type
+    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type --&gt;|&quot;Categorical&quot;| DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp
+    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp --&gt;|&quot;Independent&quot;| MANOVA
+    DV_Two_or_more_DV_br_type_Continuous_IV --&gt;|&quot;Two or more&quot;| DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type
+    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type --&gt;|&quot;Categorical&quot;| DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp
+    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp --&gt;|&quot;Independent&quot;| Factorial_MANOVA
+    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type --&gt;|&quot;Both&quot;| MANCOVA
+
+    style parametric_tests fill:#cce5ff,stroke:#333
+    style nonparametric_tests fill:#d4edda,stroke:#333
+</pre>
+:::
+`</figure>`{=html}
+::::
+:::::
+::::::
+
+-->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="test_selection_flowchart.svg" class="img-fluid figure-img"></p>
+<figcaption>Flowchart of the decision tree for statistical test selection</figcaption>
+</figure>
 </div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_wide_read <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"test_selection_scheme_wide.csv"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>n.cols <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>DVn  <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">1</span>]) )</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>DVt  <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">2</span>]) )</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>IVn  <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">3</span>]) )</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>IVt  <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">4</span>]) )</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>IVc  <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">5</span>]) )</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>Samp <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">6</span>]) )</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>PT   <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" |</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)"</span>,<span class="st">""</span>,<span class="fu">unique</span>(data_wide_read[,<span class="dv">7</span>]) )</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># skipNode &lt;- function(edge_label, node_to) {</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     # If edge_label is not NA, then skip this node</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     if (!edge_label == "") { return( sprintf("|%s| ", edge_label) ) } else { return( "" ) }</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (a <span class="cf">in</span> DVn) {</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>( <span class="fu">sprintf</span>(<span class="st">"  DVn{#DV} --&gt;|%s| DVn%s"</span>, a, a) ) </span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (b <span class="cf">in</span> IVc) {</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>( <span class="fu">sprintf</span>(<span class="st">"  DVn%s --&gt;"</span>, a ) )</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># edge label</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (b <span class="sc">!=</span> <span class="st">""</span>) { <span class="fu">print</span>( <span class="fu">sprintf</span>(<span class="st">"|%s| "</span>, b) ) }</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (c <span class="cf">in</span> Samp) {</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>              <span class="co"># If no edge then blank</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>              <span class="co"># if edge than first finish node to previous edge</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>              <span class="cf">if</span> (c <span class="sc">!=</span> <span class="st">""</span>) { <span class="fu">print</span>( <span class="fu">sprintf</span>(<span class="st">"%s%s%s</span><span class="sc">\n</span><span class="st">"</span>, a, b, c) ) }</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Next new node and next edge</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>              <span class="cf">if</span> (c <span class="sc">!=</span> <span class="st">""</span>) { <span class="fu">print</span>( <span class="fu">sprintf</span>(<span class="st">"%s%s%s --&gt;|%s| "</span>, a, b, c, c) ) }</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>              <span class="fu">print</span>( <span class="fu">sprintf</span>(<span class="st">" %s</span><span class="sc">\n</span><span class="st">"</span>, PT[i]) ) </span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>              i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "  DVn{#DV} --&gt;|One| DVnOne"
-[1] "  DVnOne --&gt;"
-[1] " One-sampleT-test\n"
-[1] "OneDependent\n"
-[1] "OneDependent --&gt;|Dependent| "
-[1] " Pearsoncorrelationorregression\n"
-[1] "OneIndependent\n"
-[1] "OneIndependent --&gt;|Independent| "
-[1] " Paired-samplesT-testDependentT-test\n"
-[1] "OneBoth\n"
-[1] "OneBoth --&gt;|Both| "
-[1] " IndependentT-testorPointbiserialcorrelation\n"
-[1] "  DVnOne --&gt;"
-[1] "|Two| "
-[1] " One-wayrepeatedmeasuresANOVA\n"
-[1] "OneTwoDependent\n"
-[1] "OneTwoDependent --&gt;|Dependent| "
-[1] " One-wayindependentANOVA\n"
-[1] "OneTwoIndependent\n"
-[1] "OneTwoIndependent --&gt;|Independent| "
-[1] " Multipleregression\n"
-[1] "OneTwoBoth\n"
-[1] "OneTwoBoth --&gt;|Both| "
-[1] " FactorialrepeatedmeasuresANOVA\n"
-[1] "  DVnOne --&gt;"
-[1] "|Morethantwo| "
-[1] " IndependentfactorialANOVA/multipleregression\n"
-[1] "OneMorethantwoDependent\n"
-[1] "OneMorethantwoDependent --&gt;|Dependent| "
-[1] " FactorialmixedANOVA\n"
-[1] "OneMorethantwoIndependent\n"
-[1] "OneMorethantwoIndependent --&gt;|Independent| "
-[1] " Multipleregression/ANCOVA\n"
-[1] "OneMorethantwoBoth\n"
-[1] "OneMorethantwoBoth --&gt;|Both| "
-[1] " Logisticregressionorbiserial/pointbiserialcorrelation\n"
-[1] "  DVn{#DV} --&gt;|Twoormore| DVnTwoormore"
-[1] "  DVnTwoormore --&gt;"
-[1] " Pearsonchi-squareorlikelihoodratio\n"
-[1] "TwoormoreDependent\n"
-[1] "TwoormoreDependent --&gt;|Dependent| "
-[1] " Logisticregression\n"
-[1] "TwoormoreIndependent\n"
-[1] "TwoormoreIndependent --&gt;|Independent| "
-[1] " Loglinearanalysis\n"
-[1] "TwoormoreBoth\n"
-[1] "TwoormoreBoth --&gt;|Both| "
-[1] " MANOVA\n"
-[1] "  DVnTwoormore --&gt;"
-[1] "|Two| "
-[1] " FactorialMANOVA\n"
-[1] "TwoormoreTwoDependent\n"
-[1] "TwoormoreTwoDependent --&gt;|Dependent| "
-[1] " MANCOVA\n"
-[1] "TwoormoreTwoIndependent\n"
-[1] "TwoormoreTwoIndependent --&gt;|Independent| "
-[1] " NA\n"
-[1] "TwoormoreTwoBoth\n"
-[1] "TwoormoreTwoBoth --&gt;|Both| "
-[1] " NA\n"
-[1] "  DVnTwoormore --&gt;"
-[1] "|Morethantwo| "
-[1] " NA\n"
-[1] "TwoormoreMorethantwoDependent\n"
-[1] "TwoormoreMorethantwoDependent --&gt;|Dependent| "
-[1] " NA\n"
-[1] "TwoormoreMorethantwoIndependent\n"
-[1] "TwoormoreMorethantwoIndependent --&gt;|Independent| "
-[1] " NA\n"
-[1] "TwoormoreMorethantwoBoth\n"
-[1] "TwoormoreMorethantwoBoth --&gt;|Both| "
-[1] " NA\n"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DVn2DVt &lt;- unique(</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sprintf("  DVn{#DV} --&gt;|%s| %s{%s}\n",</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         data_wide_read$'DV number', # Node #DV</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#         data_wide_read$DVn,</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         mmd_decision_node_names[2]) # Node DV type</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+</section>
 
 </main>
 <!-- /main column -->
