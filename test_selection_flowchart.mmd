@@ -5,27 +5,27 @@ config:
 ---
 
 graph LR
-    DV{"DV"}
-    DV_One_DV_br_type{"DV<br>type"}
-    DV_One_DV_br_type_Continuous_IV{"IV"}
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type{"IV<br>type"}
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat{"IV<br>cat"}
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp{"Samp"}
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp{"Samp"}
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{"IV<br>type"}
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
-    DV_One_DV_br_type_Categorical_IV{"IV"}
-    DV_One_DV_br_type_Categorical_IV_One_IV_br_type{"IV<br>type"}
-    DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp{"Samp"}
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type{"IV<br>type"}
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp{"Samp"}
-    DV_Two_or_more_DV_br_type{"DV<br>type"}
-    DV_Two_or_more_DV_br_type_Continuous_IV{"IV"}
-    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type{"IV<br>type"}
-    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp{"Samp"}
-    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{"IV<br>type"}
-    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
+    _DV{"#DV"}
+    _DV_One_DV_br_type{"DV<br>type"}
+    _DV_One_DV_br_type_Continuous_IV{"#IV"}
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type{"IV<br>type"}
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat{"IV<br>cat"}
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp{"Samp"}
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp{"Samp"}
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{"IV<br>type"}
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
+    _DV_One_DV_br_type_Categorical_IV{"#IV"}
+    _DV_One_DV_br_type_Categorical_IV_One_IV_br_type{"IV<br>type"}
+    _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp{"Samp"}
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type{"IV<br>type"}
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp{"Samp"}
+    _DV_Two_or_more_DV_br_type{"DV<br>type"}
+    _DV_Two_or_more_DV_br_type_Continuous_IV{"#IV"}
+    _DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type{"IV<br>type"}
+    _DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp{"Samp"}
+    _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{"IV<br>type"}
+    _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
     subgraph parametric_tests["Parametric Tests"]
         One_sample_T_test["One-sample T-test"]
         Pearson_correlation_or_regression["Pearson correlation or regression"]
@@ -59,56 +59,56 @@ graph LR
         Robust_factorial_mixed_ANOVA["Robust factorial mixed ANOVA"]
         Robust_ANCOVA_bootstrapped_regression["Robust ANCOVA/bootstrapped regression"]
     end
-    DV -->|"One"| DV_One_DV_br_type
-    DV_One_DV_br_type -->|"Continuous"| DV_One_DV_br_type_Continuous_IV
-    DV_One_DV_br_type_Continuous_IV -->|"None"| One_sample_T_test
+    _DV -->|"One"| _DV_One_DV_br_type
+    _DV_One_DV_br_type -->|"Continuous"| _DV_One_DV_br_type_Continuous_IV
+    _DV_One_DV_br_type_Continuous_IV -->|"None"| One_sample_T_test
     One_sample_T_test --> Bootstrapped_T_test
-    DV_One_DV_br_type_Continuous_IV -->|"One"| DV_One_DV_br_type_Continuous_IV_One_IV_br_type
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type -->|"Continuous"| Pearson_correlation_or_regression
+    _DV_One_DV_br_type_Continuous_IV -->|"One"| _DV_One_DV_br_type_Continuous_IV_One_IV_br_type
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type -->|"Continuous"| Pearson_correlation_or_regression
     Pearson_correlation_or_regression --> Bootstrap_correlation_regression_Spearman_correlation_Kendall_s_tau
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type -->|"Categorical"| DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat -->|"Two"| DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp -->|"Dependent"| Paired_samples_T_test_Dependent_T_test
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type -->|"Categorical"| _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat -->|"Two"| _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp -->|"Dependent"| Paired_samples_T_test_Dependent_T_test
     Paired_samples_T_test_Dependent_T_test --> Bootstrapped_T_test_or_Wilcoxon_signed_rank_test
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp -->|"Independent"| Independent_T_test_or_Pointbiserial_correlation
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp -->|"Independent"| Independent_T_test_or_Pointbiserial_correlation
     Independent_T_test_or_Pointbiserial_correlation --> Bootstrapped_T_test_or_Mann_Whitney_test
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat -->|"More than two"| DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp -->|"Dependent"| One_way_repeated_measures_ANOVA
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat -->|"More than two"| _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp -->|"Dependent"| One_way_repeated_measures_ANOVA
     One_way_repeated_measures_ANOVA --> Bootstrapped_ANOVA_or_Friedman_s_ANOVA
-    DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp -->|"Independent"| One_way_independent_ANOVA
+    _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp -->|"Independent"| One_way_independent_ANOVA
     One_way_independent_ANOVA --> Robust_ANOVA_or_Kruskal_Wallis_test
-    DV_One_DV_br_type_Continuous_IV -->|"Two or more"| DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Continuous"| Multiple_regression
+    _DV_One_DV_br_type_Continuous_IV -->|"Two or more"| _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Continuous"| Multiple_regression
     Multiple_regression --> Bootstrapped_multiple_regression
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Categorical"| DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Dependent"| Factorial_repeated_measures_ANOVA
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Categorical"| _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Dependent"| Factorial_repeated_measures_ANOVA
     Factorial_repeated_measures_ANOVA --> Robust_factorial_repeated_measures_ANOVA
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Independent"| Independent_factorial_ANOVA_multiple_regression
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Independent"| Independent_factorial_ANOVA_multiple_regression
     Independent_factorial_ANOVA_multiple_regression --> Robust_independent_factorial_ANOVA_multiple_regression
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Both"| Factorial_mixed_ANOVA
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Both"| Factorial_mixed_ANOVA
     Factorial_mixed_ANOVA --> Robust_factorial_mixed_ANOVA
-    DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Both"| Multiple_regression_ANCOVA
+    _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Both"| Multiple_regression_ANCOVA
     Multiple_regression_ANCOVA --> Robust_ANCOVA_bootstrapped_regression
-    DV_One_DV_br_type -->|"Categorical"| DV_One_DV_br_type_Categorical_IV
-    DV_One_DV_br_type_Categorical_IV -->|"One"| DV_One_DV_br_type_Categorical_IV_One_IV_br_type
-    DV_One_DV_br_type_Categorical_IV_One_IV_br_type -->|"Continuous"| Logistic_regression_or_biserial_point_biserialcorrelation
-    DV_One_DV_br_type_Categorical_IV_One_IV_br_type -->|"Categorical"| DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp
-    DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp -->|"Independent"| Pearson_chi_square_or_likelihood_ratio
-    DV_One_DV_br_type_Categorical_IV -->|"Two or more"| DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type -->|"Continuous"| Logistic_regression
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type -->|"Categorical"| DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Independent"| Loglinear_analysis
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type -->|"Both"| DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp
-    DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp -->|"Independent"| Logistic_regression
-    DV -->|"Two or more"| DV_Two_or_more_DV_br_type
-    DV_Two_or_more_DV_br_type -->|"Continuous"| DV_Two_or_more_DV_br_type_Continuous_IV
-    DV_Two_or_more_DV_br_type_Continuous_IV -->|"One"| DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type
-    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type -->|"Categorical"| DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp
-    DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp -->|"Independent"| MANOVA
-    DV_Two_or_more_DV_br_type_Continuous_IV -->|"Two or more"| DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type
-    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Categorical"| DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp
-    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Independent"| Factorial_MANOVA
-    DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Both"| MANCOVA
+    _DV_One_DV_br_type -->|"Categorical"| _DV_One_DV_br_type_Categorical_IV
+    _DV_One_DV_br_type_Categorical_IV -->|"One"| _DV_One_DV_br_type_Categorical_IV_One_IV_br_type
+    _DV_One_DV_br_type_Categorical_IV_One_IV_br_type -->|"Continuous"| Logistic_regression_or_biserial_point_biserialcorrelation
+    _DV_One_DV_br_type_Categorical_IV_One_IV_br_type -->|"Categorical"| _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp
+    _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp -->|"Independent"| Pearson_chi_square_or_likelihood_ratio
+    _DV_One_DV_br_type_Categorical_IV -->|"Two or more"| _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type -->|"Continuous"| Logistic_regression
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type -->|"Categorical"| _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Independent"| Loglinear_analysis
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type -->|"Both"| _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp
+    _DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp -->|"Independent"| Logistic_regression
+    _DV -->|"Two or more"| _DV_Two_or_more_DV_br_type
+    _DV_Two_or_more_DV_br_type -->|"Continuous"| _DV_Two_or_more_DV_br_type_Continuous_IV
+    _DV_Two_or_more_DV_br_type_Continuous_IV -->|"One"| _DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type
+    _DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type -->|"Categorical"| _DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp
+    _DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp -->|"Independent"| MANOVA
+    _DV_Two_or_more_DV_br_type_Continuous_IV -->|"Two or more"| _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type
+    _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Categorical"| _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp
+    _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp -->|"Independent"| Factorial_MANOVA
+    _DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Both"| MANCOVA
 
     style parametric_tests fill:#cce5ff,stroke:#333
     style nonparametric_tests fill:#d4edda,stroke:#333

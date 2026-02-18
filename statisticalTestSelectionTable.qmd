@@ -1,6 +1,11 @@
 ---
 title: Test Selection Scheme
 layout: column-page
+format:
+  html:
+    mermaid:
+      theme: neutral
+      look: handDrawn
 ---
 
 
@@ -36,13 +41,6 @@ datatable(
 
 # Decision tree flowchart
 
-<!--
 ```{mermaid}
-#| echo: false
-#| eval: false
-#| file: test_selection_flowchart.mmd
+%%| file: test_selection_flowchart.mmd
 ```
-
--->
-
-![Flowchart of the decision tree for statistical test selection](test_selection_flowchart.svg)

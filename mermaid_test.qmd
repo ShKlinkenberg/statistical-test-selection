@@ -1,0 +1,11 @@
+---
+title: "Mermaid Test"
+format:
+  html:
+    mermaid:
+      theme: neutral
+      look: handDrawn
+---
+```{mermaid}
+%%| file: test_selection_flowchart.mmd
+```

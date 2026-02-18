@@ -1,0 +1,369 @@
+{
+  "id": "_DV",
+  "label": "#DV",
+  "shape": "decision",
+  "children": [
+    {
+      "id": "_DV_One_DV_br_type",
+      "label": "DV<br>type",
+      "shape": "decision",
+      "children": [
+        {
+          "id": "_DV_One_DV_br_type_Continuous_IV",
+          "label": "#IV",
+          "shape": "decision",
+          "children": [
+            {
+              "id": "One_sample_T_test",
+              "label": "One-sample T-test",
+              "shape": "box",
+              "children": [
+                {
+                  "id": "Bootstrapped_T_test",
+                  "label": "Bootstrapped T-test",
+                  "shape": "box",
+                  "edge_label": ""
+                }
+              ],
+              "edge_label": "None"
+            },
+            {
+              "id": "_DV_One_DV_br_type_Continuous_IV_One_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "Pearson_correlation_or_regression",
+                  "label": "Pearson correlation or regression",
+                  "shape": "box",
+                  "children": [
+                    {
+                      "id": "Bootstrap_correlation_regression_Spearman_correlation_Kendall_s_tau",
+                      "label": "Bootstrap correlation/regression, Spearman correlation, Kendall's tau",
+                      "shape": "box",
+                      "edge_label": ""
+                    }
+                  ],
+                  "edge_label": "Continuous"
+                },
+                {
+                  "id": "_DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat",
+                  "label": "IV<br>cat",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "_DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_Two_Samp",
+                      "label": "Samp",
+                      "shape": "decision",
+                      "children": [
+                        {
+                          "id": "Paired_samples_T_test_Dependent_T_test",
+                          "label": "Paired-samples T-test (Dependent T-test)",
+                          "shape": "box",
+                          "children": [
+                            {
+                              "id": "Bootstrapped_T_test_or_Wilcoxon_signed_rank_test",
+                              "label": "Bootstrapped T-test or Wilcoxon signed-rank test",
+                              "shape": "box",
+                              "edge_label": ""
+                            }
+                          ],
+                          "edge_label": "Dependent"
+                        },
+                        {
+                          "id": "Independent_T_test_or_Pointbiserial_correlation",
+                          "label": "Independent T-test or Pointbiserial correlation",
+                          "shape": "box",
+                          "children": [
+                            {
+                              "id": "Bootstrapped_T_test_or_Mann_Whitney_test",
+                              "label": "Bootstrapped T-test or Mann-Whitney test",
+                              "shape": "box",
+                              "edge_label": ""
+                            }
+                          ],
+                          "edge_label": "Independent"
+                        }
+                      ],
+                      "edge_label": "Two"
+                    },
+                    {
+                      "id": "_DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp",
+                      "label": "Samp",
+                      "shape": "decision",
+                      "children": [
+                        {
+                          "id": "One_way_repeated_measures_ANOVA",
+                          "label": "One-way repeated measures ANOVA",
+                          "shape": "box",
+                          "children": [
+                            {
+                              "id": "Bootstrapped_ANOVA_or_Friedman_s_ANOVA",
+                              "label": "Bootstrapped ANOVA or Friedman's ANOVA",
+                              "shape": "box",
+                              "edge_label": ""
+                            }
+                          ],
+                          "edge_label": "Dependent"
+                        },
+                        {
+                          "id": "One_way_independent_ANOVA",
+                          "label": "One-way independent ANOVA",
+                          "shape": "box",
+                          "children": [
+                            {
+                              "id": "Robust_ANOVA_or_Kruskal_Wallis_test",
+                              "label": "Robust ANOVA or Kruskal-Wallis test",
+                              "shape": "box",
+                              "edge_label": ""
+                            }
+                          ],
+                          "edge_label": "Independent"
+                        }
+                      ],
+                      "edge_label": "More than two"
+                    }
+                  ],
+                  "edge_label": "Categorical"
+                }
+              ],
+              "edge_label": "One"
+            },
+            {
+              "id": "_DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "Multiple_regression",
+                  "label": "Multiple regression",
+                  "shape": "box",
+                  "children": [
+                    {
+                      "id": "Bootstrapped_multiple_regression",
+                      "label": "Bootstrapped multiple regression",
+                      "shape": "box",
+                      "edge_label": ""
+                    }
+                  ],
+                  "edge_label": "Continuous"
+                },
+                {
+                  "id": "_DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp",
+                  "label": "Samp",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "Factorial_repeated_measures_ANOVA",
+                      "label": "Factorial repeated measures ANOVA",
+                      "shape": "box",
+                      "children": [
+                        {
+                          "id": "Robust_factorial_repeated_measures_ANOVA",
+                          "label": "Robust factorial repeated measures ANOVA",
+                          "shape": "box",
+                          "edge_label": ""
+                        }
+                      ],
+                      "edge_label": "Dependent"
+                    },
+                    {
+                      "id": "Independent_factorial_ANOVA_multiple_regression",
+                      "label": "Independent factorial ANOVA/multiple regression",
+                      "shape": "box",
+                      "children": [
+                        {
+                          "id": "Robust_independent_factorial_ANOVA_multiple_regression",
+                          "label": "Robust independent factorial ANOVA/multiple regression",
+                          "shape": "box",
+                          "edge_label": ""
+                        }
+                      ],
+                      "edge_label": "Independent"
+                    },
+                    {
+                      "id": "Factorial_mixed_ANOVA",
+                      "label": "Factorial mixed ANOVA",
+                      "shape": "box",
+                      "children": [
+                        {
+                          "id": "Robust_factorial_mixed_ANOVA",
+                          "label": "Robust factorial mixed ANOVA",
+                          "shape": "box",
+                          "edge_label": ""
+                        }
+                      ],
+                      "edge_label": "Both"
+                    }
+                  ],
+                  "edge_label": "Categorical"
+                },
+                {
+                  "id": "Multiple_regression_ANCOVA",
+                  "label": "Multiple regression/ANCOVA",
+                  "shape": "box",
+                  "children": [
+                    {
+                      "id": "Robust_ANCOVA_bootstrapped_regression",
+                      "label": "Robust ANCOVA/bootstrapped regression",
+                      "shape": "box",
+                      "edge_label": ""
+                    }
+                  ],
+                  "edge_label": "Both"
+                }
+              ],
+              "edge_label": "Two or more"
+            }
+          ],
+          "edge_label": "Continuous"
+        },
+        {
+          "id": "_DV_One_DV_br_type_Categorical_IV",
+          "label": "#IV",
+          "shape": "decision",
+          "children": [
+            {
+              "id": "_DV_One_DV_br_type_Categorical_IV_One_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "Logistic_regression_or_biserial_point_biserialcorrelation",
+                  "label": "Logistic regression or biserial/point biserialcorrelation",
+                  "shape": "box",
+                  "edge_label": "Continuous"
+                },
+                {
+                  "id": "_DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp",
+                  "label": "Samp",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "Pearson_chi_square_or_likelihood_ratio",
+                      "label": "Pearson chi-square or likelihood ratio",
+                      "shape": "box",
+                      "edge_label": "Independent"
+                    }
+                  ],
+                  "edge_label": "Categorical"
+                }
+              ],
+              "edge_label": "One"
+            },
+            {
+              "id": "_DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "Logistic_regression",
+                  "label": "Logistic regression",
+                  "shape": "box",
+                  "edge_label": "Continuous"
+                },
+                {
+                  "id": "_DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Categorical_Samp",
+                  "label": "Samp",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "Loglinear_analysis",
+                      "label": "Loglinear analysis",
+                      "shape": "box",
+                      "edge_label": "Independent"
+                    }
+                  ],
+                  "edge_label": "Categorical"
+                },
+                {
+                  "id": "_DV_One_DV_br_type_Categorical_IV_Two_or_more_IV_br_type_Both_Samp",
+                  "label": "Samp",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "Logistic_regression",
+                      "label": "Logistic regression",
+                      "shape": "box",
+                      "edge_label": "Independent"
+                    }
+                  ],
+                  "edge_label": "Both"
+                }
+              ],
+              "edge_label": "Two or more"
+            }
+          ],
+          "edge_label": "Categorical"
+        }
+      ],
+      "edge_label": "One"
+    },
+    {
+      "id": "_DV_Two_or_more_DV_br_type",
+      "label": "DV<br>type",
+      "shape": "decision",
+      "children": [
+        {
+          "id": "_DV_Two_or_more_DV_br_type_Continuous_IV",
+          "label": "#IV",
+          "shape": "decision",
+          "children": [
+            {
+              "id": "_DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "_DV_Two_or_more_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_Samp",
+                  "label": "Samp",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "MANOVA",
+                      "label": "MANOVA",
+                      "shape": "box",
+                      "edge_label": "Independent"
+                    }
+                  ],
+                  "edge_label": "Categorical"
+                }
+              ],
+              "edge_label": "One"
+            },
+            {
+              "id": "_DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "_DV_Two_or_more_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp",
+                  "label": "Samp",
+                  "shape": "decision",
+                  "children": [
+                    {
+                      "id": "Factorial_MANOVA",
+                      "label": "Factorial MANOVA",
+                      "shape": "box",
+                      "edge_label": "Independent"
+                    }
+                  ],
+                  "edge_label": "Categorical"
+                },
+                {
+                  "id": "MANCOVA",
+                  "label": "MANCOVA",
+                  "shape": "box",
+                  "edge_label": "Both"
+                }
+              ],
+              "edge_label": "Two or more"
+            }
+          ],
+          "edge_label": "Continuous"
+        }
+      ],
+      "edge_label": "Two or more"
+    }
+  ]
+}
