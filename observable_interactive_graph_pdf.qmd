@@ -1,0 +1,28 @@
+---
+title: "Statistical Test Selection Table"
+format:
+  pdf:
+    keep-tex: false
+geometry: landscape
+header-includes:
+  - \usepackage{booktabs}
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(readr)
+library(kableExtra)
+
+data_wide_read <- read_csv2("test_selection_scheme_wide.csv")
+
+data_wide_read[is.na(data_wide_read)] <- ""
+
+data_wide_read |>
+  kbl(format = "latex", booktabs = TRUE) |>
+  kable_styling(
+    latex_options = c("striped", "scale_down", "hold_position"),
+    stripe_color = "gray!15"
+  )
+```
