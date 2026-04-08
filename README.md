@@ -20,3 +20,5 @@ The different visualizations can be seen on the pages below:
 * [PDF table for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/table_typst.pdf)
 
 Run `create_all_sources.R` to compile all visualizations.
+
+The [Statistical Test Selection Guide](https://shklinkenberg.github.io/statistical-test-selection/) provides an overview of various statistical tests and their appropriate use cases.
