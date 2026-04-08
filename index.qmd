@@ -13,7 +13,7 @@ Choosing the right statistical test is crucial for accurate data analysis. This 
 
 ## The appropriate questions
 
-In order to select the appropriate statistical test, you need to consider the follosing 8 questions:
+In order to select the appropriate statistical test, you need to consider the following 8 questions:
 
 1. How many dependent variables do you have?
 2. What is the type of your dependent variable(s)?
