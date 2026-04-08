@@ -1,0 +1,34 @@
+---
+title: "Statistical Test Selection"
+subtitle: "A Guide to Choosing the Right Statistical Test"
+format: 
+    html:
+        theme: flatly
+        toc: true
+        toc-depth: 3
+        number-sections: true
+---
+
+Choosing the right statistical test is crucial for accurate data analysis. This guide provides an overview of various statistical tests and their appropriate use cases. The test selection scheme is based on Andy Field's "Discovering Statistics Using IBM SPSS Statistics" and is extended to include more tests and scenarios.
+
+## The appropriate questions
+
+In order to select the appropriate statistical test, you need to consider the follosing 8 questions:
+
+1. How many dependent variables do you have?
+2. What is the type of your dependent variable(s)?
+3. How many independent variables do you have?
+4. What is the type of your independent variable(s)?
+5. Is the independent variable(s) a continuous or categorical variable?
+6. If categorical, how many levels does it have?
+7. How is the data sampled, independently, dependently or both?
+8. Does the data meet the parametric assumptions of the test?
+
+## Statistical Test Selection Guide
+
+The following options provide different formats of the statistical test selection guide. They are all based on the same underlying test selection scheme, but presented in different formats for ease of use.
+
+* [Interactive test selection table](https://shklinkenberg.github.io/statistical-test-selection/interactive_test_selection_table.html)
+* [Mermaid flowchart for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart.html)
+* [Observable interactive graph for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/observable_interactive_graph.html)
+* [PDF table for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/table_typst.pdf)
