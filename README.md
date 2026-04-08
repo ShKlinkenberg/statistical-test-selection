@@ -19,3 +19,4 @@ The different visualizations can be seen on the pages below:
 * [Observable interactive graph for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/observable_interactive_graph.html)
 * [PDF table for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/table_typst.pdf)
 
+Run `create_all_sources.R` to compile all visualizations.
