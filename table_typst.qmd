@@ -13,7 +13,6 @@ format:
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-align: center
 
 library(readr)
 library(tinytable)

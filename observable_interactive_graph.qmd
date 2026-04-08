@@ -6,6 +6,8 @@ format:
 ---
 
 ```{ojs}
+//| echo: false
+
 d3 = require("d3@7")
 
 treeData = FileAttachment("test_selection_tree.json").json()
@@ -283,6 +285,7 @@ chart = {
 ```
 
 **Legend:** Click any node to expand/collapse. Scroll to zoom. Drag to pan.
+<br>
 <span style="background:#fff3cd;padding:2px 8px;border:1px solid #555">Has hidden children</span>
 <span style="background:#fff;padding:2px 8px;border:1px solid #555">Expanded decision</span>
 <span style="background:#cce5ff;padding:2px 8px;border:1px solid #333">Parametric test</span>

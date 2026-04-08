@@ -1,5 +1,5 @@
 ---
-title: "Mermaid Test"
+title: "Mermaid flowchart for Statistical Test Selection"
 format:
   html:
     mermaid:

@@ -40,12 +40,3 @@ datatable(
 )
 ```
 
-
-
-
-# Decision tree flowchart
-
-```{mermaid}
-%%| file: test_selection_flowchart.mmd
-```
-
