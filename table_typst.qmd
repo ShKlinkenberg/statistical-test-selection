@@ -1,0 +1,32 @@
+---
+title: "Statistical Test Selection Table"
+format:
+  typst:
+    papersize: presentation-16-9
+    fontsize: 8pt
+    margin:
+      x: 1cm
+      y: 1.2cm
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-align: center
+
+library(readr)
+library(tinytable)
+
+data_wide_read <- read_csv2("test_selection_scheme_wide.csv")
+
+data_wide_read[is.na(data_wide_read)] <- ""
+
+tt(data_wide_read) |>
+  style_tt(
+    i = seq(1, nrow(data_wide_read), by = 2),
+    background = "#EEEEEE"
+  ) |>
+  theme_tt("resize")
+```
+
