@@ -10,6 +10,10 @@ One;Continuous;Two or more;Categorical;;Dependent;Factorial repeated measures AN
 One;Continuous;Two or more;Categorical;;Independent;Independent factorial ANOVA/multiple regression;Robust independent factorial ANOVA/multiple regression
 One;Continuous;Two or more;Categorical;;Both;Factorial mixed ANOVA;Robust factorial mixed ANOVA
 One;Continuous;Two or more;Both;;;Multiple regression/ANCOVA;Robust ANCOVA/bootstrapped regression
+One;Dichotomy;None;;;;Binomial test, z test on proportion;
+One;Dichotomy;One;Dichotomy;;;Fisher exact test;
+One;Dichotomy;One;Categorical;;;Crosstabs chi-squared test;
+One;Categorical;None;;;;One-sample chi-squared test;
 One;Categorical;One;Continuous;;;Logistic regression or biserial/point biserialcorrelation;
 One;Categorical;One;Categorical;;Independent;Pearson chi-square or likelihood ratio;
 One;Categorical;Two or more;Continuous;;;Logistic regression;

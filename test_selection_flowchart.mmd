@@ -14,6 +14,8 @@ graph LR
     _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp{"Samp"}
     _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{"IV<br>type"}
     _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
+    _DV_One_DV_br_type_Dichotomy_IV{"#IV"}
+    _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type{"IV<br>type"}
     _DV_One_DV_br_type_Categorical_IV{"#IV"}
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type{"IV<br>type"}
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp{"Samp"}
@@ -38,6 +40,10 @@ graph LR
         Independent_factorial_ANOVA_multiple_regression["Independent factorial ANOVA/multiple regression"]
         Factorial_mixed_ANOVA["Factorial mixed ANOVA"]
         Multiple_regression_ANCOVA["Multiple regression/ANCOVA"]
+        Binomial_test_z_test_on_proportion["Binomial test, z test on proportion"]
+        Fisher_exact_test["Fisher exact test"]
+        Crosstabs_chi_squared_test["Crosstabs chi-squared test"]
+        One_sample_chi_squared_test["One-sample chi-squared test"]
         Logistic_regression_or_biserial_point_biserialcorrelation["Logistic regression or biserial/point biserialcorrelation"]
         Pearson_chi_square_or_likelihood_ratio["Pearson chi-square or likelihood ratio"]
         Logistic_regression["Logistic regression"]
@@ -89,7 +95,13 @@ graph LR
     Factorial_mixed_ANOVA --> Robust_factorial_mixed_ANOVA
     _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type -->|"Both"| Multiple_regression_ANCOVA
     Multiple_regression_ANCOVA --> Robust_ANCOVA_bootstrapped_regression
+    _DV_One_DV_br_type -->|"Dichotomy"| _DV_One_DV_br_type_Dichotomy_IV
+    _DV_One_DV_br_type_Dichotomy_IV -->|"None"| Binomial_test_z_test_on_proportion
+    _DV_One_DV_br_type_Dichotomy_IV -->|"One"| _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type
+    _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type -->|"Dichotomy"| Fisher_exact_test
+    _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type -->|"Categorical"| Crosstabs_chi_squared_test
     _DV_One_DV_br_type -->|"Categorical"| _DV_One_DV_br_type_Categorical_IV
+    _DV_One_DV_br_type_Categorical_IV -->|"None"| One_sample_chi_squared_test
     _DV_One_DV_br_type_Categorical_IV -->|"One"| _DV_One_DV_br_type_Categorical_IV_One_IV_br_type
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type -->|"Continuous"| Logistic_regression_or_biserial_point_biserialcorrelation
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type -->|"Categorical"| _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp

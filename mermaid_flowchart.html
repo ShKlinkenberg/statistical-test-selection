@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Mermaid flowchart for Statistical Test Selection</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -26,15 +29,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="mermaid_flowchart_files/libs/clipboard/clipboard.min.js"></script>
 <script src="mermaid_flowchart_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="mermaid_flowchart_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="mermaid_flowchart_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="mermaid_flowchart_files/libs/quarto-html/popper.min.js"></script>
 <script src="mermaid_flowchart_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="mermaid_flowchart_files/libs/quarto-html/anchor.min.js"></script>
 <link href="mermaid_flowchart_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="mermaid_flowchart_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="mermaid_flowchart_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="mermaid_flowchart_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="mermaid_flowchart_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="mermaid_flowchart_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="mermaid_flowchart_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="mermaid-theme" content="neutral">
 <script src="mermaid_flowchart_files/libs/quarto-diagram/mermaid.min.js"></script>
 <script src="mermaid_flowchart_files/libs/quarto-diagram/mermaid-init.js"></script>
@@ -89,6 +91,8 @@ graph LR
     _DV_One_DV_br_type_Continuous_IV_One_IV_br_type_Categorical_IV_br_cat_More_than_two_Samp{"Samp"}
     _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type{"IV&lt;br&gt;type"}
     _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type_Categorical_Samp{"Samp"}
+    _DV_One_DV_br_type_Dichotomy_IV{"#IV"}
+    _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type{"IV&lt;br&gt;type"}
     _DV_One_DV_br_type_Categorical_IV{"#IV"}
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type{"IV&lt;br&gt;type"}
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp{"Samp"}
@@ -113,6 +117,10 @@ graph LR
         Independent_factorial_ANOVA_multiple_regression["Independent factorial ANOVA/multiple regression"]
         Factorial_mixed_ANOVA["Factorial mixed ANOVA"]
         Multiple_regression_ANCOVA["Multiple regression/ANCOVA"]
+        Binomial_test_z_test_on_proportion["Binomial test, z test on proportion"]
+        Fisher_exact_test["Fisher exact test"]
+        Crosstabs_chi_squared_test["Crosstabs chi-squared test"]
+        One_sample_chi_squared_test["One-sample chi-squared test"]
         Logistic_regression_or_biserial_point_biserialcorrelation["Logistic regression or biserial/point biserialcorrelation"]
         Pearson_chi_square_or_likelihood_ratio["Pearson chi-square or likelihood ratio"]
         Logistic_regression["Logistic regression"]
@@ -164,7 +172,13 @@ graph LR
     Factorial_mixed_ANOVA --&gt; Robust_factorial_mixed_ANOVA
     _DV_One_DV_br_type_Continuous_IV_Two_or_more_IV_br_type --&gt;|"Both"| Multiple_regression_ANCOVA
     Multiple_regression_ANCOVA --&gt; Robust_ANCOVA_bootstrapped_regression
+    _DV_One_DV_br_type --&gt;|"Dichotomy"| _DV_One_DV_br_type_Dichotomy_IV
+    _DV_One_DV_br_type_Dichotomy_IV --&gt;|"None"| Binomial_test_z_test_on_proportion
+    _DV_One_DV_br_type_Dichotomy_IV --&gt;|"One"| _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type
+    _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type --&gt;|"Dichotomy"| Fisher_exact_test
+    _DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type --&gt;|"Categorical"| Crosstabs_chi_squared_test
     _DV_One_DV_br_type --&gt;|"Categorical"| _DV_One_DV_br_type_Categorical_IV
+    _DV_One_DV_br_type_Categorical_IV --&gt;|"None"| One_sample_chi_squared_test
     _DV_One_DV_br_type_Categorical_IV --&gt;|"One"| _DV_One_DV_br_type_Categorical_IV_One_IV_br_type
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type --&gt;|"Continuous"| Logistic_regression_or_biserial_point_biserialcorrelation
     _DV_One_DV_br_type_Categorical_IV_One_IV_br_type --&gt;|"Categorical"| _DV_One_DV_br_type_Categorical_IV_One_IV_br_type_Categorical_Samp

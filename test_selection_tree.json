@@ -219,10 +219,50 @@
           "edge_label": "Continuous"
         },
         {
+          "id": "_DV_One_DV_br_type_Dichotomy_IV",
+          "label": "#IV",
+          "shape": "decision",
+          "children": [
+            {
+              "id": "Binomial_test_z_test_on_proportion",
+              "label": "Binomial test, z test on proportion",
+              "shape": "box",
+              "edge_label": "None"
+            },
+            {
+              "id": "_DV_One_DV_br_type_Dichotomy_IV_One_IV_br_type",
+              "label": "IV<br>type",
+              "shape": "decision",
+              "children": [
+                {
+                  "id": "Fisher_exact_test",
+                  "label": "Fisher exact test",
+                  "shape": "box",
+                  "edge_label": "Dichotomy"
+                },
+                {
+                  "id": "Crosstabs_chi_squared_test",
+                  "label": "Crosstabs chi-squared test",
+                  "shape": "box",
+                  "edge_label": "Categorical"
+                }
+              ],
+              "edge_label": "One"
+            }
+          ],
+          "edge_label": "Dichotomy"
+        },
+        {
           "id": "_DV_One_DV_br_type_Categorical_IV",
           "label": "#IV",
           "shape": "decision",
           "children": [
+            {
+              "id": "One_sample_chi_squared_test",
+              "label": "One-sample chi-squared test",
+              "shape": "box",
+              "edge_label": "None"
+            },
             {
               "id": "_DV_One_DV_br_type_Categorical_IV_One_IV_br_type",
               "label": "IV<br>type",
