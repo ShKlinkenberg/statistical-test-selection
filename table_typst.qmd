@@ -2,9 +2,7 @@
 title: "Statistical Test Selection Table"
 format:
   typst:
-    page:
-      width: 21cm
-      height: 29.7cm
+    papersize: presentation-4-3
     fontsize: 8pt
     margin:
       x: 1cm
