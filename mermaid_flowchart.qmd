@@ -5,7 +5,41 @@ format:
     mermaid:
       theme: neutral
       look: handDrawn
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+        <style>
+          .mermaid-zoom-container svg {
+            cursor: grab;
+            max-width: 100%;
+            height: 600px;
+          }
+        </style>
 ---
+
 ```{mermaid}
+%%| label: fig-statistical-test-selection-flowchart
+%%| fig-cap: "Statistical test selection flowchart"
 %%| file: test_selection_flowchart.mmd
+```
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Give Quarto/Mermaid time to render the inline SVG before enabling pan/zoom
+  setTimeout(function () {
+    document.querySelectorAll("div.cell-output-display svg").forEach(function (svg) {
+      svg.closest(".cell-output-display").classList.add("mermaid-zoom-container");
+      svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.5,
+        maxZoom: 10
+      });
+    });
+  }, 500);
+});
+</script>
 ```
