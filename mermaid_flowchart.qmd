@@ -2,9 +2,6 @@
 title: "Mermaid flowchart for Statistical Test Selection"
 format:
   html:
-    mermaid:
-      theme: neutral
-      look: handDrawn
     include-in-header:
       text: |
         <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
@@ -18,6 +15,8 @@ format:
 ---
 
 ```{mermaid}
+%%| theme: neutral
+%%| look: handDrawn
 %%| label: fig-statistical-test-selection-flowchart
 %%| fig-cap: "Statistical test selection flowchart"
 %%| file: test_selection_flowchart.mmd
