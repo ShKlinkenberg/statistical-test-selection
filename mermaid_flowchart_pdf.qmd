@@ -1,0 +1,15 @@
+---
+title: "Mermaid flowchart for Statistical Test Selection"
+format:
+  pdf:
+    papersize: a0
+    fontsize: 10pt
+    margin: 1cm
+---
+
+
+```{mermaid}
+%%| file: test_selection_flowchart.mmd
+```
+
+
