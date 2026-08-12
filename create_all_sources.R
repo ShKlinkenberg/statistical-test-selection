@@ -5,7 +5,11 @@ source("mermaid_to_json.R")
 # Update all the .qmd files that use the sources
 # run separate lines for compiling quarto
 
-# quarto::quarto_render("interactive_test_selection_table.qmd")
-# quarto::quarto_render("mermaid_flowchart.qmd")
-# quarto::quarto_render("observable_interactive_graph.qmd")
-# quarto::quarto_render("table_typst.qmd")
+# Make sure you have quarto installed and available in your R environment. If not, you can install it using the following command:
+# install.packages('quarto')
+
+quarto::quarto_render("interactive_test_selection_table.qmd")
+quarto::quarto_render("mermaid_flowchart.qmd")
+quarto::quarto_render("mermaid_flowchart_pdf.qmd")
+quarto::quarto_render("observable_interactive_graph.qmd")
+quarto::quarto_render("table_typst.qmd")

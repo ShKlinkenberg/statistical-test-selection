@@ -15,7 +15,8 @@ The following steps are taken to generate the visualizations.
 The different visualizations can be seen on the pages below:
 
 * [Interactive test selection table](https://shklinkenberg.github.io/statistical-test-selection/interactive_test_selection_table.html)
-* [Mermaid flowchart for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart.html)
+* [Mermaid flowchart for statistical test selection (pan and zoom)](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart.html)
+* [Mermaid flowchart for statistical test selection (PDF)](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart_pdf.pdf)
 * [Observable interactive graph for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/observable_interactive_graph.html)
 * [PDF table for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/table_typst.pdf)
 
