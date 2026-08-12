@@ -26,9 +26,10 @@ In order to select the appropriate statistical test, you need to consider the fo
 
 ## Statistical Test Selection Guide
 
-The following options provide different formats of the statistical test selection guide. They are all based on the same underlying test selection scheme, but presented in different formats for ease of use.
+The following options provide different formats of the statistical test selection guide. They are all based on the same underlying test selection [table](https://shklinkenberg.github.io/statistical-test-selection/test_selection_scheme_wide.csv), but presented in different formats for ease of use.
 
 * [Interactive test selection table](https://shklinkenberg.github.io/statistical-test-selection/interactive_test_selection_table.html)
-* [Mermaid flowchart for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart.html)
+* [Mermaid flowchart for statistical test selection (pan and zoom)](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart.html)
+* [Mermaid flowchart for statistical test selection (PDF)](https://shklinkenberg.github.io/statistical-test-selection/mermaid_flowchart_pdf.pdf)
 * [Observable interactive graph for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/observable_interactive_graph.html)
 * [PDF table for statistical test selection](https://shklinkenberg.github.io/statistical-test-selection/table_typst.pdf)

@@ -11,5 +11,3 @@ format:
 %%| fig-cap: "Flowchart for Statistical Test Selection"
 %%| file: test_selection_flowchart.mmd
 ```
-
-
