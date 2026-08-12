@@ -1,5 +1,4 @@
 ---
-title: "Mermaid flowchart for Statistical Test Selection"
 format:
   pdf:
     papersize: a0
@@ -9,6 +8,7 @@ format:
 
 
 ```{mermaid}
+%%| fig-cap: "Flowchart for Statistical Test Selection"
 %%| file: test_selection_flowchart.mmd
 ```
 
